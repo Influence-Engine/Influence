@@ -25,6 +25,120 @@ namespace UnitTest.Math
 
         const int testCount = 100000;
 
+        #region Creation Tests
+
+        [Fact]
+        public void IdentityMatrix()
+        {
+            Matrix4x4 identity = Matrix4x4.Identity;
+
+            // Test each element against expected values
+            Assert.Equal(1f, identity[0, 0]);
+            Assert.Equal(0f, identity[0, 1]);
+            Assert.Equal(0f, identity[0, 2]);
+            Assert.Equal(0f, identity[0, 3]);
+
+            Assert.Equal(0f, identity[1, 0]);
+            Assert.Equal(1f, identity[1, 1]);
+            Assert.Equal(0f, identity[1, 2]);
+            Assert.Equal(0f, identity[1, 3]);
+
+            Assert.Equal(0f, identity[2, 0]);
+            Assert.Equal(0f, identity[2, 1]);
+            Assert.Equal(1f, identity[2, 2]);
+            Assert.Equal(0f, identity[2, 3]);
+
+            Assert.Equal(0f, identity[3, 0]);
+            Assert.Equal(0f, identity[3, 1]);
+            Assert.Equal(0f, identity[3, 2]);
+            Assert.Equal(1f, identity[3, 3]);
+        }
+
+        [Fact]
+        public void TranslationMatrix()
+        {
+            Matrix4x4 translationMatrix = Matrix4x4.Translate(new Vector3(1f, 2f, 3f));
+
+            // Test translation matrix against expected values
+            Assert.Equal(1f, translationMatrix[0, 0]);
+            Assert.Equal(0f, translationMatrix[0, 1]);
+            Assert.Equal(0f, translationMatrix[0, 2]);
+            Assert.Equal(1f, translationMatrix[0, 3]);
+
+            Assert.Equal(0f, translationMatrix[1, 0]);
+            Assert.Equal(1f, translationMatrix[1, 1]);
+            Assert.Equal(0f, translationMatrix[1, 2]);
+            Assert.Equal(2f, translationMatrix[1, 3]);
+
+            Assert.Equal(0f, translationMatrix[2, 0]);
+            Assert.Equal(0f, translationMatrix[2, 1]);
+            Assert.Equal(1f, translationMatrix[2, 2]);
+            Assert.Equal(3f, translationMatrix[2, 3]);
+
+            Assert.Equal(0f, translationMatrix[3, 0]);
+            Assert.Equal(0f, translationMatrix[3, 1]);
+            Assert.Equal(0f, translationMatrix[3, 2]);
+            Assert.Equal(1f, translationMatrix[3, 3]);
+        }
+
+        [Fact]
+        public void ScaleMatrix()
+        {
+            // Create a scale matrix
+            Matrix4x4 scaleMatrix = Matrix4x4.Scale(new Vector3(2f, 3f, 4f));
+
+            // Test scale matrix against expected values
+            Assert.Equal(2f, scaleMatrix[0, 0]);
+            Assert.Equal(0f, scaleMatrix[0, 1]);
+            Assert.Equal(0f, scaleMatrix[0, 2]);
+            Assert.Equal(0f, scaleMatrix[0, 3]);
+
+            Assert.Equal(0f, scaleMatrix[1, 0]);
+            Assert.Equal(3f, scaleMatrix[1, 1]);
+            Assert.Equal(0f, scaleMatrix[1, 2]);
+            Assert.Equal(0f, scaleMatrix[1, 3]);
+
+            Assert.Equal(0f, scaleMatrix[2, 0]);
+            Assert.Equal(0f, scaleMatrix[2, 1]);
+            Assert.Equal(4f, scaleMatrix[2, 2]);
+            Assert.Equal(0f, scaleMatrix[2, 3]);
+
+            Assert.Equal(0f, scaleMatrix[3, 0]);
+            Assert.Equal(0f, scaleMatrix[3, 1]);
+            Assert.Equal(0f, scaleMatrix[3, 2]);
+            Assert.Equal(1f, scaleMatrix[3, 3]);
+        }
+
+        [Fact]
+        public void UniformScaleMatrix()
+        {
+            // Create a uniform scale matrix
+            Matrix4x4 uniformScaleMatrix = Matrix4x4.UniformScale(2f);
+
+            // Test uniform scale matrix against expected values
+            Assert.Equal(2f, uniformScaleMatrix[0, 0]);
+            Assert.Equal(0f, uniformScaleMatrix[0, 1]);
+            Assert.Equal(0f, uniformScaleMatrix[0, 2]);
+            Assert.Equal(0f, uniformScaleMatrix[0, 3]);
+
+            Assert.Equal(0f, uniformScaleMatrix[1, 0]);
+            Assert.Equal(2f, uniformScaleMatrix[1, 1]);
+            Assert.Equal(0f, uniformScaleMatrix[1, 2]);
+            Assert.Equal(0f, uniformScaleMatrix[1, 3]);
+
+            Assert.Equal(0f, uniformScaleMatrix[2, 0]);
+            Assert.Equal(0f, uniformScaleMatrix[2, 1]);
+            Assert.Equal(2f, uniformScaleMatrix[2, 2]);
+            Assert.Equal(0f, uniformScaleMatrix[2, 3]);
+
+            Assert.Equal(0f, uniformScaleMatrix[3, 0]);
+            Assert.Equal(0f, uniformScaleMatrix[3, 1]);
+            Assert.Equal(0f, uniformScaleMatrix[3, 2]);
+            Assert.Equal(1f, uniformScaleMatrix[3, 3]);
+        }
+
+        #endregion
+
         [Fact]
         public void Multiplication()
         {
@@ -83,6 +197,47 @@ namespace UnitTest.Math
             Assert.Equal(a, expected);
         }
 
+        [Fact]
+        public void MultiplyPoint()
+        {
+            // Create a matrix
+            Matrix4x4 matrix = testMatrix2;
+
+            // Multiply a point
+            Vector3 point = new Vector3(1, 2, 3); 
+            Vector3 result = matrix.MultiplyPoint(point);
+
+            // Define the expected result
+            Vector3 expectedResult = new Vector3(
+                (0f * 1f + 1f * 2f + 2f * 3f + 3f) / ((12f * 1f + 13f * 2f + 14f * 3f + 15f)), // x component
+                (4f * 1f + 5f * 2f + 6f * 3f + 7f) / ((12f * 1f + 13f * 2f + 14f * 3f + 15f)), // y component
+                (8f * 1f + 9f * 2f + 10f * 3f + 11f) / ((12f * 1f + 13f * 2f + 14f * 3f + 15f)) // z component
+            );
+
+            // Assert that the result matches the expected result
+            Assert.Equal(expectedResult.x, result.x, 0.0001f);
+            Assert.Equal(expectedResult.y, result.y, 0.0001f);
+            Assert.Equal(expectedResult.z, result.z, 0.0001f);
+        }
+
+        [Fact]
+        public void MultiplyVector()
+        {
+            // Create a matrix
+            Matrix4x4 matrix = testMatrix2;
+
+            // Multiply a vector
+            Vector3 vector = new Vector3(1, 2, 3);
+            Vector3 result = matrix.MultiplyVector(vector);
+
+            // Test the result
+            Assert.Equal(8, result.x); // 0*1 + 1*2 + 2*3 = 8
+            Assert.Equal(32, result.y); // 4*1 + 5*2 + 6*3 = 32
+            Assert.Equal(56, result.z); // 8*1 + 9*2 + 10*3= 56
+        }
+
+        #region Timed Tests
+
         // On Quartzi's Machine this method averages around (~73k - ~78k) Ticks for 100k runs
         [Fact]
         public void Timed_IndexerLogicSpeed_Switch()
@@ -123,6 +278,9 @@ namespace UnitTest.Math
             Assert.True(true);
         }
 
+        #endregion
+
+        #region Testing Functions
 
         public float GetBySwitch(Matrix4x4 data, int index)
         {
@@ -149,10 +307,11 @@ namespace UnitTest.Math
             }
         }
 
-
         public float GetByModulo(Matrix4x4 data, int index)
         {
-            return data[index % 4, index / 4];
+            return data[index / 4, index % 4];
         }
+
+        #endregion
     }
 }
