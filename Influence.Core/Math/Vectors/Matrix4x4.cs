@@ -198,10 +198,12 @@ namespace Influence
         /// <summary>Creates a scaling Matrix</summary>
         public static Matrix4x4 CreateScale(Vector3 vector)
         {
-            Matrix4x4 matrix = Matrix4x4.Identity;
+            Matrix4x4 matrix = Zero;
             matrix[0, 0] = vector.x;
             matrix[1,1] = vector.y;
             matrix[2, 2] = vector.z;
+            matrix[3, 3] = 1f;
+
             return matrix;
         }
         /// <summary>Creates a scaling Matrix</summary>
@@ -210,10 +212,12 @@ namespace Influence
         /// <summary>Creates a uniform scaling Matrix</summary>
         public static Matrix4x4 CreateUniformScale(float scale)
         {
-            Matrix4x4 matrix = Matrix4x4.Identity;
+            Matrix4x4 matrix = Zero;
             matrix[0, 0] = scale;
             matrix[1, 1] = scale;
             matrix[2, 2] = scale;
+            matrix[3, 3] = 1f;
+
             return matrix;
         }
 
