@@ -117,9 +117,9 @@ namespace Influence
         /// <summary>Updates the model matrix based on the current position, rotation, and scale.</summary>
         void UpdateModelMatrix()
         {
-            Matrix4x4 scaleMatrix = Matrix4x4.Scale(_scale);
+            Matrix4x4 scaleMatrix = Matrix4x4.CreateScale(_scale);
             Matrix4x4 rotationMatrix = _rotation.ToRotationMatrix();
-            Matrix4x4 translationMatrix = Matrix4x4.Translate(_position);
+            Matrix4x4 translationMatrix = Matrix4x4.CreateTranslate(_position);
 
             modelMatrix = translationMatrix * rotationMatrix * scaleMatrix;
         }

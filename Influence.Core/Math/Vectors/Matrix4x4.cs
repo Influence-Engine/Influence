@@ -196,7 +196,7 @@ namespace Influence
         }
 
         /// <summary>Creates a scaling Matrix</summary>
-        public static Matrix4x4 Scale(Vector3 vector)
+        public static Matrix4x4 CreateScale(Vector3 vector)
         {
             Matrix4x4 matrix = Matrix4x4.Identity;
             matrix[0, 0] = vector.x;
@@ -205,10 +205,10 @@ namespace Influence
             return matrix;
         }
         /// <summary>Creates a scaling Matrix</summary>
-        public static Matrix4x4 Scale(float x, float y, float z) => Scale(new Vector3(x, y, z));
+        public static Matrix4x4 CreateScale(float x, float y, float z) => CreateScale(new Vector3(x, y, z));
 
         /// <summary>Creates a uniform scaling Matrix</summary>
-        public static Matrix4x4 UniformScale(float scale)
+        public static Matrix4x4 CreateUniformScale(float scale)
         {
             Matrix4x4 matrix = Matrix4x4.Identity;
             matrix[0, 0] = scale;
@@ -218,7 +218,7 @@ namespace Influence
         }
 
         /// <summary>Creates a translate Matrix</summary>
-        public static Matrix4x4 Translate(Vector3 vector)
+        public static Matrix4x4 CreateTranslate(Vector3 vector)
         {
             Matrix4x4 matrix = Matrix4x4.Identity;
             matrix[0,3] = vector.x;
@@ -227,7 +227,7 @@ namespace Influence
             return matrix;
         }
         /// <summary>Creates a translate Matrix</summary>
-        public static Matrix4x4 Translate(float x, float y, float z) => Translate(new Vector3(x,y,z));
+        public static Matrix4x4 CreateTranslate(float x, float y, float z) => CreateTranslate(new Vector3(x,y,z));
 
         // TODO Create Rotate
 

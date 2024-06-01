@@ -57,7 +57,7 @@ namespace UnitTest.Math
         [Fact]
         public void TranslationMatrix()
         {
-            Matrix4x4 translationMatrix = Matrix4x4.Translate(new Vector3(1f, 2f, 3f));
+            Matrix4x4 translationMatrix = Matrix4x4.CreateTranslate(new Vector3(1f, 2f, 3f));
 
             // Test translation matrix against expected values
             Assert.Equal(1f, translationMatrix[0, 0]);
@@ -85,7 +85,7 @@ namespace UnitTest.Math
         public void ScaleMatrix()
         {
             // Create a scale matrix
-            Matrix4x4 scaleMatrix = Matrix4x4.Scale(new Vector3(2f, 3f, 4f));
+            Matrix4x4 scaleMatrix = Matrix4x4.CreateScale(new Vector3(2f, 3f, 4f));
 
             // Test scale matrix against expected values
             Assert.Equal(2f, scaleMatrix[0, 0]);
@@ -113,7 +113,7 @@ namespace UnitTest.Math
         public void UniformScaleMatrix()
         {
             // Create a uniform scale matrix
-            Matrix4x4 uniformScaleMatrix = Matrix4x4.UniformScale(2f);
+            Matrix4x4 uniformScaleMatrix = Matrix4x4.CreateUniformScale(2f);
 
             // Test uniform scale matrix against expected values
             Assert.Equal(2f, uniformScaleMatrix[0, 0]);
@@ -154,7 +154,7 @@ namespace UnitTest.Math
         [Fact]
         public void Translation_1()
         {
-            Matrix4x4 translation = Matrix4x4.Translate(new Vector3(1, 2, 3));
+            Matrix4x4 translation = Matrix4x4.CreateTranslate(new Vector3(1, 2, 3));
             Vector3 originalPoint = new Vector3(4, 5, 6);
 
             Vector3 result = translation.MultiplyPoint3x4(originalPoint);
@@ -166,7 +166,7 @@ namespace UnitTest.Math
         [Fact]
         public void Translation_2()
         {
-            Matrix4x4 translation = Matrix4x4.Translate(new Vector3(-5.75f, 3.25f, -1.5f));
+            Matrix4x4 translation = Matrix4x4.CreateTranslate(new Vector3(-5.75f, 3.25f, -1.5f));
             Vector3 originalPoint = new Vector3(2.5f, -4.5f, 1.25f);
 
             Vector3 result = translation.MultiplyPoint3x4(originalPoint);
@@ -263,7 +263,7 @@ namespace UnitTest.Math
             Assert.Equal(expectedForwardVector, actualForwardVector); // Adjust the precision as needed
         }
 
-            #region Timed Tests
+        #region Timed Tests
 
             // On Quartzi's Machine this method averages around (~73k - ~78k) Ticks for 100k runs
             [Fact]
