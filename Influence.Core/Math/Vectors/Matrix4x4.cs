@@ -58,8 +58,8 @@ namespace Influence
 
         public float this[int index]
         {
-            get => data [index % 4, index / 4];
-            set => data[index % 4, index / 4] = value;
+            get => data [index / 4, index % 4];
+            set => data[index / 4, index % 4] = value;
         }
 
         #region Common Overrides (ToString, GetHashCode, Equals)
@@ -204,6 +204,8 @@ namespace Influence
             matrix[2, 2] = vector.z;
             return matrix;
         }
+        /// <summary>Creates a scaling Matrix</summary>
+        public static Matrix4x4 Scale(float x, float y, float z) => Scale(new Vector3(x, y, z));
 
         /// <summary>Creates a uniform scaling Matrix</summary>
         public static Matrix4x4 UniformScale(float scale)
@@ -224,6 +226,8 @@ namespace Influence
             matrix[2, 3] = vector.z;
             return matrix;
         }
+        /// <summary>Creates a translate Matrix</summary>
+        public static Matrix4x4 Translate(float x, float y, float z) => Translate(new Vector3(x,y,z));
 
         // TODO Create Rotate
 
