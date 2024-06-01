@@ -58,6 +58,7 @@ namespace Influence
         /// <summary>Updates the projection matrix based on the camera's field of view and clipping planes.</summary>
         void UpdateProjectionMatrix()
         {
+            // TODO Get aspect ratio from window
             _projectionMatrix = Matrix4x4.CreatePerspectiveFieldOfView(fieldOfView, 1f, nearClippingPlane, farClippingPlane);
         }
     }
