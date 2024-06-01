@@ -405,7 +405,7 @@ namespace Influence
 
         public Matrix4x4 ToRotationMatrix()
         {
-            Quaternion q = Normalize(this);
+            Quaternion q = this;
 
             float xx = q.x * q.x;
             float yy = q.y * q.y;
