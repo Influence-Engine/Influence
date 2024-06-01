@@ -224,10 +224,10 @@ namespace Influence
         /// <summary>Creates a translate Matrix</summary>
         public static Matrix4x4 CreateTranslate(Vector3 vector)
         {
-            Matrix4x4 matrix = Matrix4x4.Identity;
-            matrix[0,3] = vector.x;
-            matrix[1, 3] = vector.y;
-            matrix[2, 3] = vector.z;
+            Matrix4x4 matrix = Identity;
+            matrix[3,0] = vector.x;
+            matrix[3, 1] = vector.y;
+            matrix[3, 2] = vector.z;
             return matrix;
         }
         /// <summary>Creates a translate Matrix</summary>
