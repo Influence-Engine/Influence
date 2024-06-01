@@ -58,55 +58,8 @@ namespace Influence
 
         public float this[int index]
         {
-            get
-            {
-                switch (index)
-                {
-                    case 0: return data[0,0];
-                    case 1: return data[1, 0];
-                    case 2: return data[2, 0];
-                    case 3: return data[3, 0];
-                    case 4: return data[0, 1];
-                    case 5: return data[1, 1];
-                    case 6: return data[2, 1];
-                    case 7: return data[3, 1];
-                    case 8: return data[0, 2];
-                    case 9: return data[1, 2];
-                    case 10: return data[2, 2];
-                    case 11: return data[3, 2];
-                    case 12: return data[0, 3];
-                    case 13: return data[1, 3];
-                    case 14: return data[2, 3];
-                    case 15: return data[3, 3];
-                    default:
-                        throw new IndexOutOfRangeException("Invalid Matrix4x4 index.");
-                }
-            }
-
-            set
-            {
-                switch (index)
-                {
-                    case 0: data[0, 0] = value; break;
-                    case 1: data[1, 0] = value; break;
-                    case 2: data[2, 0] = value; break;
-                    case 3: data[3, 0] = value; break;
-                    case 4: data[0, 1] = value; break;
-                    case 5: data[1, 1] = value; break;
-                    case 6: data[2, 1] = value; break;
-                    case 7: data[3, 1] = value; break;
-                    case 8: data[0, 2] = value; break;
-                    case 9: data[1, 2] = value; break;
-                    case 10: data[2, 2] = value; break;
-                    case 11: data[3, 2] = value; break;
-                    case 12: data[0, 3] = value; break;
-                    case 13: data[1, 3] = value; break;
-                    case 14: data[2, 3] = value; break;
-                    case 15: data[3, 3] = value; break;
-                    default:
-                        throw new IndexOutOfRangeException("Invalid Matrix4x4 index.");
-                }
-            }
+            get => data [index % 4, index / 4];
+            set => data[index % 4, index / 4] = value;
         }
 
         #region Common Overrides (ToString, GetHashCode, Equals)
