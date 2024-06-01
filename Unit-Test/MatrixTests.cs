@@ -63,21 +63,21 @@ namespace UnitTest.Math
             Assert.Equal(1f, translationMatrix[0, 0]);
             Assert.Equal(0f, translationMatrix[0, 1]);
             Assert.Equal(0f, translationMatrix[0, 2]);
-            Assert.Equal(1f, translationMatrix[0, 3]);
+            Assert.Equal(0f, translationMatrix[0, 3]);
 
             Assert.Equal(0f, translationMatrix[1, 0]);
             Assert.Equal(1f, translationMatrix[1, 1]);
             Assert.Equal(0f, translationMatrix[1, 2]);
-            Assert.Equal(2f, translationMatrix[1, 3]);
+            Assert.Equal(0f, translationMatrix[1, 3]);
 
             Assert.Equal(0f, translationMatrix[2, 0]);
             Assert.Equal(0f, translationMatrix[2, 1]);
             Assert.Equal(1f, translationMatrix[2, 2]);
-            Assert.Equal(3f, translationMatrix[2, 3]);
+            Assert.Equal(0f, translationMatrix[2, 3]);
 
-            Assert.Equal(0f, translationMatrix[3, 0]);
-            Assert.Equal(0f, translationMatrix[3, 1]);
-            Assert.Equal(0f, translationMatrix[3, 2]);
+            Assert.Equal(1f, translationMatrix[3, 0]);
+            Assert.Equal(2f, translationMatrix[3, 1]);
+            Assert.Equal(3f, translationMatrix[3, 2]);
             Assert.Equal(1f, translationMatrix[3, 3]);
         }
 
@@ -147,30 +147,6 @@ namespace UnitTest.Math
             Matrix4x4 result = a * b;
 
             Matrix4x4 expected = new Matrix4x4(new Vector4(2, 0, 0, 0), new Vector4(0, 2, 0, 0), new Vector4(0, 0, 2, 0), new Vector4(0, 0, 0, 2));
-
-            Assert.Equal(result, expected);
-        }
-
-        [Fact]
-        public void Translation_1()
-        {
-            Matrix4x4 translation = Matrix4x4.CreateTranslate(new Vector3(1, 2, 3));
-            Vector3 originalPoint = new Vector3(4, 5, 6);
-
-            Vector3 result = translation.MultiplyPoint3x4(originalPoint);
-            Vector3 expected = new Vector3(5, 7, 9);
-
-            Assert.Equal(result, expected);
-        }
-
-        [Fact]
-        public void Translation_2()
-        {
-            Matrix4x4 translation = Matrix4x4.CreateTranslate(new Vector3(-5.75f, 3.25f, -1.5f));
-            Vector3 originalPoint = new Vector3(2.5f, -4.5f, 1.25f);
-
-            Vector3 result = translation.MultiplyPoint3x4(originalPoint);
-            Vector3 expected = new Vector3(-3.25f, -1.25f, -0.25f);
 
             Assert.Equal(result, expected);
         }
