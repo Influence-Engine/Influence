@@ -358,19 +358,17 @@ namespace Influence
             float yScale = 1f / tanHalfFovy;
             float xScale = yScale / aspectRatio;
 
-            float zRange = farPlaneDistance - nearPlaneDistance;
-            float zScale = 1.0f / zRange;
+            float nearFarRange = farPlaneDistance / (nearPlaneDistance - farPlaneDistance);
 
             Matrix4x4 matrix = Zero;
 
             matrix[0, 0] = xScale;
+
             matrix[1, 1] = yScale;
 
-            float nearFarRange = float.IsInfinity(farPlaneDistance) ? -1f : (farPlaneDistance / (nearPlaneDistance - farPlaneDistance));
             matrix[2, 2] = nearFarRange;
-
-            // Cant set
             matrix[2, 3] = -1f;
+
             matrix[3, 2] = nearPlaneDistance * nearFarRange;
 
             return matrix;
