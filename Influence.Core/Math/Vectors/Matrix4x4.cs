@@ -311,8 +311,8 @@ namespace Influence
             Vector3 result = new Vector3();
 
             result.x = data[0, 0] * vector.x + data[0, 1] * vector.y + data[0, 2] * vector.z;
-            result.x = data[1, 0] * vector.x + data[1, 1] * vector.y + data[1, 2] * vector.z;
-            result.x = data[2, 0] * vector.x + data[2, 1] * vector.y + data[2, 2] * vector.z;
+            result.y = data[1, 0] * vector.x + data[1, 1] * vector.y + data[1, 2] * vector.z;
+            result.z = data[2, 0] * vector.x + data[2, 1] * vector.y + data[2, 2] * vector.z;
 
             return result;
         }
