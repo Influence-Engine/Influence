@@ -236,10 +236,37 @@ namespace UnitTest.Math
             Assert.Equal(56, result.z); // 8*1 + 9*2 + 10*3= 56
         }
 
-        #region Timed Tests
-
-        // On Quartzi's Machine this method averages around (~73k - ~78k) Ticks for 100k runs
         [Fact]
+        public void CreateLookAt()
+        {
+            // Define the position, target, and up vector
+            Vector3 position = new Vector3(0, 0, -5);
+            Vector3 target = new Vector3(0, 0, 0);
+            Vector3 upVector = new Vector3(0, 1, 0);
+
+            // Call the CreateLookAt method
+            Matrix4x4 transformationMatrix = Matrix4x4.CreateLookAt(position, target, upVector);
+
+            // Calculate the expected forward vector
+            Vector3 expectedForwardVector = target - position;
+
+            // Normalize the expected forward vector to match the output of CreateLookAt
+            expectedForwardVector.Normalize();
+
+            // Extract the forward vector from the transformation matrix
+            Vector3 actualForwardVector = new Vector3(transformationMatrix[0,2], transformationMatrix[1,2], transformationMatrix[2,2]);
+
+            // Normalize the actual forward vector
+            actualForwardVector.Normalize();
+
+            // Assert that the extracted forward vector matches the expected one
+            Assert.Equal(expectedForwardVector, actualForwardVector); // Adjust the precision as needed
+        }
+
+            #region Timed Tests
+
+            // On Quartzi's Machine this method averages around (~73k - ~78k) Ticks for 100k runs
+            [Fact]
         public void Timed_IndexerLogicSpeed_Switch()
         {
             Stopwatch sw = Stopwatch.StartNew();
