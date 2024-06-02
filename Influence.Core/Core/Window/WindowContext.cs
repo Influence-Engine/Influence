@@ -99,6 +99,7 @@ namespace Influence.Core
             window.Initialize();
 
             glContext = new GLContext(this);
+            Input.Initialize(window);
 
             UpdateWindowTitle();
 
