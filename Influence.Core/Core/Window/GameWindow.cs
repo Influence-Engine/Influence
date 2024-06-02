@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 
 using Influence.Core;
 
@@ -15,26 +14,9 @@ namespace Influence
         /// <param name="title">The initial title of the window.</param>
         public GameWindow(Vector2Int size, string title = "Influence") : base(size, title) {}
 
-        GameObject cameraObject;
-        Camera camera;
-
-        static IKeyboard keyboard;
-
-        static Vector2 LastMousePosition;
-        static float xRotation = 0f;
-
         /// <summary>Executes the main game loop.</summary>
         public override void Run()
         {
-            cameraObject = new GameObject();
-            cameraObject.transform.position = new Vector3(0, 0, 3f);
-            camera = cameraObject.AddComponent<Camera>();
-
-            Camera.mainCamera = camera;
-
-            Console.WriteLine("Can I print the mainCamera viewMatrix?: " + (Camera.mainCamera.viewMatrix).ToString());
-
-
             // Starts game loop
             Window.Run(delegate
             {
@@ -68,14 +50,6 @@ namespace Influence
             Time.deltaTimeAsDouble = deltaTime;
 
             //Console.WriteLine("FPS: " + Time.frameCount);
-
-            MoveMouse();
-            MoveCamera();
-
-            if(Input.IsKeyDown(Key.Escape))
-            {
-                Window.Close();
-            }
 
             HandleAllUpdates();
         }
@@ -125,75 +99,5 @@ namespace Influence
                 }
             }
         }
-
-        // TESTING AREA :3
-        #region Testing Zone (Remove later)
-
-        void MoveCamera()
-        {
-            var moveSpeed = 2.5f * (float)Time.deltaTime;
-
-            if (Input.IsKeyDown(Key.W))
-            {
-                //Move forwards
-                cameraObject.transform.Translate(cameraObject.transform.forward * moveSpeed);
-            }
-            if (Input.IsKeyDown(Key.S))
-            {
-                //Move backwards
-                cameraObject.transform.Translate(-cameraObject.transform.forward * moveSpeed);
-            }
-            if (Input.IsKeyDown(Key.A))
-            {
-                //Move left
-                cameraObject.transform.Translate(-cameraObject.transform.right * moveSpeed);
-            }
-            if (Input.IsKeyDown(Key.D))
-            {
-                //Move right
-                cameraObject.transform.Translate(cameraObject.transform.right * moveSpeed);
-            }
-
-            if (Input.IsKeyDown(Key.Space))
-            {
-                //Move down
-                cameraObject.transform.Translate(cameraObject.transform.up * moveSpeed);
-            }
-
-            if (Input.IsKeyDown(Key.ShiftLeft))
-            {
-                //Move down
-                cameraObject.transform.Translate(-cameraObject.transform.up * moveSpeed);
-            }
-        }
-
-        unsafe void MoveMouse()
-        {
-            var lookSensitivity = 1f * Time.deltaTime;
-            if (LastMousePosition == default) { LastMousePosition = Input.mousePosition; }
-            else
-            {
-                var mouseX = (Input.mousePosition.x - LastMousePosition.x) * lookSensitivity;
-                var mouseY = (Input.mousePosition.y - LastMousePosition.y ) * lookSensitivity;
-
-                // Up Down
-                xRotation -= mouseY;
-                xRotation = Mathq.Clamp(xRotation, -89f, 89f);
-
-                // Apply Left Right
-                camera.transform.Rotate(0f, mouseX, 0f);
-
-                Quaternion pitch = Quaternion.Euler(xRotation, 0f, 0f);
-                Quaternion yaw = Quaternion.Euler(0f, mouseX, 0f);
-                camera.transform.rotation = pitch * yaw;
-
-                //camera.transform.rotation = Quaternion.Euler(0f, mouseX, 0f);
-                //camera.transform.Rotate(Vector3.Up * mouseX);
-
-                LastMousePosition = Input.mousePosition;
-            }
-        }
-
-        #endregion
     }
 }
