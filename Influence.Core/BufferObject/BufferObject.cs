@@ -91,8 +91,8 @@ namespace Influence
             VertexAttribPointer(index, (size / sizeof(float)), normalized, stride);
         }
 
-        /// <summary>Draws primitives from array data.</summary>
-        /// <param name="vertexCount">Number of vertices to render.</param>
+        /// <summary>Draws primitives from element data.</summary>
+        /// <param name="indexCount">Number of indices to render.</param>
         public unsafe void DrawElements(uint indexCount)
         {
             OpenGL.DrawElements(PrimitiveType.Triangles, indexCount, DrawElementsType.UnsignedInt, null);
