@@ -93,9 +93,9 @@ namespace Influence
 
         /// <summary>Draws primitives from array data.</summary>
         /// <param name="vertexCount">Number of vertices to render.</param>
-        public unsafe void DrawElements(uint vertexCount)
+        public unsafe void DrawElements(uint indexCount)
         {
-            OpenGL.DrawElements(PrimitiveType.Triangles, vertexCount, DrawElementsType.UnsignedInt, null);
+            OpenGL.DrawElements(PrimitiveType.Triangles, indexCount, DrawElementsType.UnsignedInt, null);
         }
     }
 }
