@@ -8,7 +8,7 @@ namespace Influence
     public static class Input
     {
         static IInputContext inputContext;
-        static Dictionary<Key, bool> keyStates = new Dictionary<Key, bool>();
+        static Dictionary<int, bool> keyStates = new Dictionary<int, bool>();
 
         static IMouse mouse;
         public static Vector2 mousePosition => new Vector2(mouse.Position.X, mouse.Position.Y);
@@ -28,10 +28,10 @@ namespace Influence
             // Create hookable Action where which you can register too for MouseMove Event
         }
 
-        static void OnKeyDown(IKeyboard keyboard, Key key, int keyCode) => keyStates[key] = true;
-        static void OnKeyUp(IKeyboard keyboard, Key key, int keyCode) => keyStates[key] = false;
+        static void OnKeyDown(IKeyboard keyboard, Key key, int keyCode) => keyStates[(int)key] = true;
+        static void OnKeyUp(IKeyboard keyboard, Key key, int keyCode) => keyStates[(int)key] = false;
 
-        public static bool IsKeyDown(Key key) => keyStates.GetValueOrDefault(key, false);
-        public static bool IsKeyUp(Key key) => !keyStates.GetValueOrDefault(key, false);
+        public static bool IsKeyDown(KeyCode key) => keyStates.GetValueOrDefault((int)key, false);
+        public static bool IsKeyUp(KeyCode key) => !keyStates.GetValueOrDefault((int)key, false);
     }
 }
