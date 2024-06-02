@@ -59,7 +59,7 @@ public class Mesh : Component, IRenderable
         _material.SetVector3("viewPos", Camera.mainCamera.transform.position);
 
         bufferObject.Bind();
-        bufferObject.DrawElements(vertexCount);
+        bufferObject.DrawElements(indexCount);
 
         bufferObject.Unbind();
     }
