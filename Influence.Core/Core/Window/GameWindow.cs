@@ -99,5 +99,18 @@ namespace Influence
                 }
             }
         }
+
+        /// <summary>
+        /// Toggles the visibility of the mouse cursor.
+        /// </summary>
+        /// <param name="visible">True to show the cursor, false to hide it.</param>
+        public void SetCursorVisibility(bool visible)
+        {
+            var cursorMode = visible ? CursorMode.Normal : CursorMode.Disabled;
+            foreach (var mouse in Input.mice)
+            {
+                mouse.Cursor.CursorMode = cursorMode;
+            }
+        }
     }
 }
