@@ -14,7 +14,7 @@ The goal of Influence is to be a versatile engine capable of handling everything
 |Component System  |Registering, creating, using components.                      |**In Progress**|
 |Rendering Meshes  |Rendering meshes using materials and shaders.                 |**In Progress**|
 |Camera Component  |Working camera, with fov, rotation, near/far plane            |**In Progress**|
-|Input System      |Handling basic inputs for mouse and keyboard                  |**Planned**    |
+|Input System      |Handling basic inputs for mouse and keyboard                  |**Working**    |
 |Audio System      |Playing audio through an Audio Source                         |**Planned**    |
 |UI System         |Rendering Text and Images in the UI layer                     |**Planned**    |
 |Physics System    |Simble AABB colliding, Rigidbody, Raycasting                  |**Planned**    |
