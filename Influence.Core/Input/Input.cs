@@ -17,6 +17,8 @@ namespace Influence
 
         static Dictionary<int, bool> keyStates = new Dictionary<int, bool>();
 
+        static Vector2 _inBoundPosition = Vector2.Zero;
+        public static Vector2 mousePositionInBound => _inBoundPosition;
         public static Vector2 mousePosition => new Vector2(activeMouse.Position.X, activeMouse.Position.Y);
 
         internal static void Initialize(IWindow window)
@@ -49,9 +51,11 @@ namespace Influence
             // Register button Events on all mice.
             foreach (IMouse mouse in mice)
             {
+                mouse.MouseMove -= OnMouseMove;
                 mouse.MouseDown -= OnMouseDown;
                 mouse.MouseUp -= OnMouseUp;
 
+                mouse.MouseMove += OnMouseMove;
                 mouse.MouseDown += OnMouseDown;
                 mouse.MouseUp += OnMouseUp;
             }
@@ -80,6 +84,12 @@ namespace Influence
         #endregion
 
         #region Mouse Functions
+
+        static void OnMouseMove(IMouse mouse, System.Numerics.Vector2 position)
+        {
+            activeMouse = mouse;
+            _inBoundPosition = new Vector2(position.X, position.Y);
+        }
 
         static void OnMouseDown(IMouse mouse, MouseButton mouseButton)
         {
