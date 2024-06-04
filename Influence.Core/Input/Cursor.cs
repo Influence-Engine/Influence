@@ -4,6 +4,7 @@ namespace Influence
 {
     public static class Cursor
     {
+        /// <summary>Gets the current cursor position.</summary>
         public static Vector2 position
         {
             get
@@ -15,9 +16,12 @@ namespace Influence
             }
         }
 
+        /// <summary>Indicates whether the application should track the cursor position within its bounds only.</summary>
         public static bool onlyTrackInBounds = false;
 
         static bool _visibility = true;
+
+        /// <summary>Gets or sets whether the mouse cursor is visible.</summary>
         public static bool visible
         {
             get { return _visibility; }
