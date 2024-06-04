@@ -34,7 +34,7 @@ namespace Influence
         /// <summary>Determines whether the specified object is equal to the current object.</summary>
         /// <param name="other">The object to compare with the current object.</param>
         /// <returns>True if the specified object is equal to the current object; otherwise, false.</returns>
-        public override bool Equals(object? other)
+        public override bool Equals(object other)
         {
             if (!(other is Object otherObject)) 
                 return false;
@@ -74,9 +74,9 @@ namespace Influence
         /// <param name="exists">The object to check for existence.</param>
         public static implicit operator bool(Object exists) => !CompareObjects(exists, null);
 
-        public static bool operator ==(Object a, Object b) => !CompareObjects(a!, b!);
+        public static bool operator ==(Object a, Object b) => CompareObjects(a, b);
 
-        public static bool operator !=(Object a, Object b) => CompareObjects(a!, b!);
+        public static bool operator !=(Object a, Object b) => !CompareObjects(a, b);
 
         #endregion
 
