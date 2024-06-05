@@ -25,7 +25,7 @@ namespace Influence.Window
         /// <summary>Should SwapBuffers be called automatically at the end of each Render event?</summary>
         public bool swapBuffersAutomatically;
 
-
+        /// <summary>Sensible default options for creating a window.</summary>
         public static WindowOptions Default { get; }
 
         public WindowOptions(bool isVisible, Vector2Int position, Vector2Int size, string title, int targetFramerate, bool vSync = true, bool swapBuffersAutomatically = true, bool topMost = false)
