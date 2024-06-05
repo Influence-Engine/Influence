@@ -130,6 +130,12 @@ namespace Influence.Window
             OpenGL.Dispose();
         }
 
+        ~WindowContext()
+        {
+            Dispose();
+        }
+
+
         #region Functions
 
         // QUESTION should we allow these to be set publicly and manually? Giving full controll to creators.
