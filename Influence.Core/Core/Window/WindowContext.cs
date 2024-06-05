@@ -1,10 +1,12 @@
 ﻿using System;
 
+using Influence.Core;
+
 using Silk.NET.Maths;
 using Silk.NET.OpenGL;
 using Silk.NET.Windowing;
 
-namespace Influence.Core
+namespace Influence.Window
 {
     /// <summary>
     /// An abstract base class for managing window contexts in an application. <br/>
@@ -83,26 +85,28 @@ namespace Influence.Core
         }
 
         /// <summary>Initializes a new instance of the WindowContext class with specified size and title.</summary>
-        /// <param name="size">The initial size of the window.</param>
-        /// <param name="title">The initial title of the window.</param>
-        public WindowContext(Vector2Int size, string title = "Influence")
+        /// <param name="windowOptions">The initial options of the window.</param>
+        public WindowContext(WindowOptions windowOptions)
         {
+            // Set the title :3
             _title = title;
 
-            WindowOptions options = WindowOptions.Default with
-            {
-                Size = new Vector2D<int>(size.x, size.y),
-                Title = title,
-            };
+            // Create the Window
+            window = Silk.NET.Windowing.Window.Create(windowOptions.ToSilk());
 
-            window = Silk.NET.Windowing.Window.Create(options);
+            // Initialize / Create the window on the underlying platform.
             window.Initialize();
 
+            // Initialize a new GL instance for the window.
             glContext = new GLContext(this);
+
+            // Initialize / hook the Input System to the window
             Input.Initialize(window);
 
+            // Update window title
             UpdateWindowTitle();
 
+            // Register / Handle Events
             window.Update += Update;
             window.Render += Render;
             window.Resize += (size) => OnWindowResized(new Vector2Int(size.X, size.Y));
@@ -110,6 +114,11 @@ namespace Influence.Core
             window.Closing += OnWindowQuit;
             window.StateChanged += OnWindowStateChanged;
         }
+
+        /// <summary>Initializes a new instance of the WindowContext class with specified size and title.</summary>
+        /// <param name="size">The initial size of the window.</param>
+        /// <param name="title">The initial title of the window.</param>
+        public WindowContext(Vector2Int size, string title = "Influence") : this(new WindowOptions(size, title)) { }
 
         /// <summary>Runs the main loop of the window context.</summary>
         public abstract void Run();

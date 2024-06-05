@@ -1,4 +1,6 @@
-﻿using Silk.NET.Maths;
+﻿using Influence.Window;
+
+using Silk.NET.Maths;
 using Silk.NET.OpenGL;
 
 namespace Influence.Core

@@ -1,10 +1,6 @@
-﻿using System;
+﻿using Influence.Core;
 
-using Influence.Core;
-
-using Silk.NET.Input;
-
-namespace Influence
+namespace Influence.Window
 {
     /// <summary>Represents a game window, inheriting from WindowContext to manage window-related operations.</summary>
     public class GameWindow : WindowContext
