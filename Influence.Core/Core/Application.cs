@@ -66,6 +66,20 @@ namespace Influence
 
         internal static WindowContext activeWindow;
 
+        /// <summary>The target framerate for the application.</summary>
+        public static int targetFramerate
+        {
+            get => activeWindow.targetFramerate;
+            set => activeWindow.targetFramerate = value;
+        }
+
+        /// <summary>The fixed framerate for the application.</summary>
+        public static int fixedFramerate
+        {
+            get => activeWindow.fixedFramerate;
+            set => activeWindow.fixedFramerate = value;
+        }
+
         /// <summary>Quits the application.</summary>
         public static void Quit()
         {
