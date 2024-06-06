@@ -82,6 +82,10 @@ namespace Influence.Window
         // Goes through all registered Renderables and runs their render method.
         void RenderAllRenderables()
         {
+            // When there is no camera set then we cannot/should not be able to render any 3D objects.
+            if (!Camera.CanRender)
+                return;
+
             int count = CreationRegistry.RenderablesCount; // Cache Count of Renderables
             for (int i = 0; i < count; i++) // Go through all Renderables
             {

@@ -44,9 +44,6 @@ public class Mesh : Component, IRenderable
     /// <summary>Renders the mesh.</summary>
     public unsafe void Render()
     {
-        if (!Camera.CanRender)
-            return;
-
         _material.Use();
 
         _material.SetMatrix4("model", transform.worldMatrix);
