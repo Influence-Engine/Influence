@@ -88,6 +88,12 @@ namespace Influence.Window
         /// <param name="windowOptions">The initial options of the window.</param>
         public WindowContext(WindowOptions windowOptions)
         {
+            if (Application.activeWindow != null)
+            {
+                Console.WriteLine("A window has already been created.");
+                return;
+            }
+
             // Set the title :3
             _title = title;
 
@@ -102,6 +108,9 @@ namespace Influence.Window
 
             // Initialize / hook the Input System to the window
             Input.Initialize(window);
+
+            // Add this window as our current active Window.
+            Application.activeWindow = this;
 
             // Update window title
             UpdateWindowTitle();

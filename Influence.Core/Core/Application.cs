@@ -1,15 +1,17 @@
 ﻿using System;
-
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 
+using Influence.Window;
 
 namespace Influence
 {
     /// <summary>Contains utility methods and properties for accessing application metadata and directories.</summary>
     public class Application
     {
+        #region Application Data
+
         static Assembly _entryAssembly;
 
         /// <summary>Gets the entry assembly of the application.</summary>
@@ -57,5 +59,19 @@ namespace Influence
 
         /// <summary>Gets the product version as specified in the application's version information.</summary>
         public static string version => fileVersionInfo.ProductVersion;
+
+        #endregion
+
+        #region Context
+
+        internal static WindowContext activeWindow;
+
+        /// <summary>Quits the application.</summary>
+        public static void Quit()
+        {
+            activeWindow.Window.Close();
+        }
+
+        #endregion
     }
 }
