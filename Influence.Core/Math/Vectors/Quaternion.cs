@@ -371,7 +371,7 @@ namespace Influence
 
         public static Quaternion AngleAxis(float angleInDegrees, Vector3 axis)
         {
-            float radianAngle = angleInDegrees * Mathq.Pi / 180f;
+            float radianAngle = angleInDegrees * Mathq.Deg2Rad;
             float halfAngle = radianAngle * 0.5f;
 
             float sinHalfAngle = Trigq.Sin(halfAngle);
