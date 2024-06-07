@@ -309,9 +309,9 @@ namespace Influence
 
         public static Quaternion Euler(Vector3 euler)
         {
-            float pitchRad = euler.x * Mathq.Pi / 180f;
-            float yawRad = euler.y * Mathq.Pi / 180f;
-            float rollRad = euler.z * Mathq.Pi / 180f;
+            float pitchRad = euler.x * Mathq.Deg2Rad;
+            float yawRad = euler.y * Mathq.Deg2Rad;
+            float rollRad = euler.z * Mathq.Deg2Rad;
 
             float cy = Trigq.Cos(yawRad * 0.5f);
             float sy = Trigq.Sin(yawRad * 0.5f);
