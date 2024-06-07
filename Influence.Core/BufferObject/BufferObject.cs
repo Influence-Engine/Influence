@@ -74,21 +74,21 @@ namespace Influence
         /// <param name="size">Number of components per vertex attribute.</param>
         /// <param name="normalized">Specifies whether fixed-point data values should be normalized or converted directly as fixed-point values when they are accessed.</param>
         /// <param name="stride">Byte offset between consecutive vertex attributes.</param>
-        public unsafe void VertexAttribPointer(int index, int size, bool normalized, uint stride)
+        public unsafe void VertexAttribPointer(uint index, int size, bool normalized, uint stride, int offset = 0)
         {
-            OpenGL.VertexAttribPointer(0, size, VertexAttribPointerType.Float, normalized, stride, null);
+            OpenGL.VertexAttribPointer(index, size, VertexAttribPointerType.Float, normalized, stride, (void*)(offset * size));
         }
 
         /// <summary>Specifies the format of the vertex data based on the type parameter.</summary>
         /// <param name="index">Index of the vertex attribute array.</param>
         /// <param name="normalized">Specifies whether fixed-point data values should be normalized or converted directly as fixed-point values when they are accessed.</param>
-        public unsafe void VertexAttribPointer(int index, bool normalized)
+        public unsafe void VertexAttribPointer(uint index, bool normalized, int offset = 0)
         {
             Type type = typeof(T);
             int size = Marshal.SizeOf(type);
             uint stride = (uint)size;
 
-            VertexAttribPointer(index, (size / sizeof(float)), normalized, stride);
+            VertexAttribPointer(index, (size / sizeof(float)), normalized, stride, offset);
         }
 
         /// <summary>Draws primitives from element data.</summary>
