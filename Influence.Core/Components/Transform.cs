@@ -121,7 +121,7 @@ namespace Influence
             Matrix4x4 rotationMatrix = _rotation.ToRotationMatrix();
             Matrix4x4 translationMatrix = Matrix4x4.CreateTranslate(_position);
 
-            modelMatrix = translationMatrix * rotationMatrix * scaleMatrix;
+            modelMatrix = rotationMatrix  * scaleMatrix * translationMatrix ;
         }
 
         #endregion
