@@ -336,7 +336,7 @@ namespace Influence
         {
             float sinr_cosp = 2f * (quaternion.x * quaternion.w + quaternion.y * quaternion.z);
             float cosr_cosp = 1f - 2f * (quaternion.x * quaternion.x + quaternion.y * quaternion.y);
-            float roll = Trigq.Atan2(sinr_cosp, cosr_cosp) * 180f / Mathq.Pi;
+            float roll = Trigq.Atan2(sinr_cosp, cosr_cosp) * Mathq.Rad2Deg;
 
             float sinp = 2f * (quaternion.y * quaternion.w - quaternion.x * quaternion.z);
             float pitch;
@@ -346,22 +346,14 @@ namespace Influence
             }
             else
             {
-                pitch = Trigq.Asin(sinp) * 180f / Mathq.Pi;
+                pitch = Trigq.Asin(sinp) * Mathq.Rad2Deg;
             }
 
             float siny_cosp = 2f * (quaternion.z * quaternion.w + quaternion.x * quaternion.y);
             float cosy_cosp = 1f - 2f * (quaternion.y * quaternion.y + quaternion.z * quaternion.z);
-            float yaw = Trigq.Atan2(siny_cosp, cosy_cosp) * 180f/ Mathq.Pi;
+            float yaw = Trigq.Atan2(siny_cosp, cosy_cosp) * Mathq.Rad2Deg;
 
             return new Vector3(pitch, yaw, roll);
-
-            // Old Implementation... doesnt have any near 90 checks.
-            /*
-            return new Vector3(
-                Trigq.Atan2(quaternion.y, quaternion.w) * Mathq.Rad2Deg,
-                Trigq.Acos(quaternion.x) * Mathq.Rad2Deg,
-                Trigq.Atan2(quaternion.z, quaternion.w) * Mathq.Rad2Deg);
-            */
         }
         public Vector3 ToEuler() => ToEulerAngles(this);
 
