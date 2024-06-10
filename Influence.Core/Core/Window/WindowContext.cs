@@ -106,6 +106,17 @@ namespace Influence.Window
             // Initialize a new GL instance for the window.
             glContext = new GLContext(this);
 
+
+
+#if DEBUG
+            OpenGL.Enable(EnableCap.DebugOutput);
+            OpenGL.Enable(EnableCap.DebugOutputSynchronous);
+            unsafe
+            {
+                OpenGL.DebugMessageCallback(Resolve.DebugOpenGL, null);
+            }
+#endif
+
             // Initialize / hook the Input System to the window
             Input.Initialize(window);
 
