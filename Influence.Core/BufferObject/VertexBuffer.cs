@@ -1,4 +1,5 @@
 ﻿using Silk.NET.OpenGL;
+using System;
 using System.Runtime.InteropServices;
 
 namespace Influence
@@ -18,15 +19,16 @@ namespace Influence
 
         /// <summary>Initializes a new instance of the VertexBuffer class.</summary>
         /// <param name="gl">An instance of GL representing the OpenGL context.</param>
-        /// <param name="vertices">Array of vertices to store in the buffer.</param>
-        public unsafe VertexBuffer(GL gl, T[] vertices)
+        /// <param name="vertices">Span of vertices to store in the buffer.</param>
+        public unsafe VertexBuffer(GL gl, Span<T> vertices)
         {
             id = gl.GenBuffer();
             gl.BindBuffer(BufferTargetARB.ArrayBuffer, id);
 
             vertexCount = vertices.Length;
             elementSize = Marshal.SizeOf<T>();
-            fixed (void* v = &vertices[0])
+
+            fixed (void* v = vertices)
             {
                 gl.BufferData(BufferTargetARB.ArrayBuffer, (nuint)(vertices.Length * elementSize), v, BufferUsageARB.StaticDraw);
             }

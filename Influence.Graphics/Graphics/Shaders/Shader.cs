@@ -369,7 +369,8 @@ namespace Influence
             #version 460 core
 
             layout (location = 0) in vec3 vPos;
-            layout (location = 1) in vec3 normal;
+            layout (location = 1) in vec3 vNormal;
+            layout (location = 2) in vec2 vTexture;
 
             uniform mat4 projection;
             uniform mat4 model;
@@ -388,7 +389,7 @@ namespace Influence
 
                 // Pass data to fragment shader
                 fPos = vec3(worldPosition);
-                fNormal = mat3(transpose(inverse(model))) * normal;
+                fNormal = mat3(transpose(inverse(model))) * vNormal;
             }
             ";
 
@@ -398,18 +399,12 @@ namespace Influence
             in vec3 fPos;
             in vec3 fNormal;
 
-            struct Material 
-            {
-                vec3 diffuse;
-                vec3 specular;
-            };
-
-            uniform Material material;
-
             uniform vec4 mColor;
 
             uniform vec4 lightColor; // Get from global light
             uniform vec3 lightPos; // Get from global light
+            uniform float lightAmbientStrength; // Get from global light
+            uniform float lightSpecularStrength; // Get from global light
 
             uniform vec3 viewPos; // Get from Camera
 
@@ -417,8 +412,7 @@ namespace Influence
 
             void main()
             {
-                float ambientStrength = 1; // Todo move to global light
-                vec3 ambient = ambientStrength * vec3(lightColor.x, lightColor.y, lightColor.z);
+                vec3 ambient = lightAmbientStrength * vec3(lightColor.x, lightColor.y, lightColor.z);
 
                 vec3 norm = normalize(fNormal);
                 vec3 lightDirection = normalize(lightPos - fPos);
@@ -426,11 +420,10 @@ namespace Influence
                 float diff = max(dot(norm, lightDirection), 0);
                 vec3 diffuse = diff * vec3(lightColor.x, lightColor.y, lightColor.z);
 
-                float specularStrength = 0.5; // Todo move to material
                 vec3 viewDirection = normalize(viewPos - fPos);
                 vec3 reflectDirection = reflect(-lightDirection, norm);
                 float spec = pow(max(dot(viewDirection, reflectDirection), 0), 32);
-                vec3 specular = specularStrength * spec * vec3(lightColor.x, lightColor.y, lightColor.z);
+                vec3 specular = lightSpecularStrength * spec * vec3(lightColor.x, lightColor.y, lightColor.z);
 
                 vec3 result = (ambient + diffuse + specular) * vec3(mColor.x, mColor.y, mColor.z);
 

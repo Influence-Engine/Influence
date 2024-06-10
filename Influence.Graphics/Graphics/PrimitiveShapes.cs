@@ -29,12 +29,12 @@ namespace Influence
         /// <returns>A Mesh object representing the quad.</returns>
         public static Mesh CreateQuad()
         {
-            Vector3[] vertices =
+            VertexData[] vertexData =
             {
-                new Vector3(-0.5f, -0.5f, 0.0f),  // Bottom-left
-                new Vector3(0.5f, -0.5f, 0.0f),   // Bottom-right
-                new Vector3(0.5f, 0.5f, 0.0f),    // Top-right
-                new Vector3(-0.5f, 0.5f, 0.0f)    // Top-left
+                new VertexData(new Vector3(-0.5f, -0.5f, 0.0f), new Vector3(0,0, -1)),  // Bottom-left
+                new VertexData(new Vector3(0.5f, -0.5f, 0.0f), new Vector3(0,0, -1)),  // Bottom-right
+                new VertexData(new Vector3(0.5f, 0.5f, 0.0f), new Vector3(0,0, -1)),  // Top-right
+                new VertexData(new Vector3(-0.5f, 0.5f, 0.0f), new Vector3(0,0, -1))  // Top-left
             };
 
             uint[] indices =
@@ -43,23 +43,25 @@ namespace Influence
                 2, 3, 0     // Second triangle
             };
 
-            return new Mesh(vertices, indices);
+            return new Mesh(vertexData, indices);
         }
 
         /// <summary>Creates a cube.</summary>
         /// <returns>A Mesh object representing the cube.</returns>
         public static Mesh CreateCube()
         {
-            Vector3[] vertices =
+            VertexData[] vertexData =
             {
-                new Vector3(-0.5f, -0.5f, -0.5f),
-                new Vector3(0.5f, -0.5f, -0.5f),
-                new Vector3(0.5f, 0.5f, -0.5f),
-                new Vector3(-0.5f, 0.5f, -0.5f),
-                new Vector3(-0.5f, -0.5f, 0.5f),
-                new Vector3(0.5f, -0.5f, 0.5f),
-                new Vector3(0.5f, 0.5f, 0.5f),
-                new Vector3(-0.5f, 0.5f, 0.5f)
+                // Vertices, Normals
+                new VertexData(new Vector3(-0.5f, -0.5f, -0.5f), new Vector3(0,0, -1)),
+                new VertexData(new Vector3(0.5f, -0.5f, -0.5f), new Vector3(0,0, -1)),
+                new VertexData(new Vector3(0.5f, 0.5f, -0.5f), new Vector3(0,0, -1)),
+                new VertexData(new Vector3(-0.5f, 0.5f, -0.5f), new Vector3(0,0, -1)),
+
+                new VertexData(new Vector3(-0.5f, -0.5f, 0.5f), new Vector3(0,0, 1)),
+                new VertexData(new Vector3(0.5f, -0.5f, 0.5f), new Vector3(0,0, 1)),
+                new VertexData(new Vector3(0.5f, 0.5f, 0.5f), new Vector3(0,0, 1)),
+                new VertexData(new Vector3(-0.5f, 0.5f, 0.5f), new Vector3(0,0, 1)),
             };
 
             uint[] indices =
@@ -72,7 +74,7 @@ namespace Influence
                 0, 4, 5, 5, 1, 0    // Bottom face
             };
 
-            return new Mesh(vertices, indices);
+            return new Mesh(vertexData, indices);
         }
 
         // QUESTION do we remove the radius for the sphere creation as we handle size through transform.scale?
@@ -124,7 +126,7 @@ namespace Influence
                 }
             }
 
-            return new Mesh(vertices.ToArray(), indices.ToArray());
+            return Mesh.CreateFromVertices(vertices.ToArray(), indices.ToArray());
         }
     }
 }

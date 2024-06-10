@@ -1,5 +1,5 @@
-﻿
-using Influence;
+﻿using Influence;
+using Influence.Graphics;
 
 /// <summary>
 /// Represents a mesh object that can be rendered. 
@@ -8,7 +8,7 @@ using Influence;
 /// </summary>
 public class Mesh : Component, IRenderable
 {
-    BufferObject<Vector3> bufferObject;
+    BufferObject<VertexData, uint> bufferObject;
 
     /// <summary>Gets the total count of vertices in the mesh.</summary>
     public uint vertexCount => (uint)bufferObject.vbo.vertexCount;
@@ -21,25 +21,43 @@ public class Mesh : Component, IRenderable
     public Material material => _material;
 
     /// <summary>Initializes a new instance of the Mesh class with specified vertices, indices, and material.</summary>
-    /// <param name="vertices">The array of vertices defining the shape of the mesh.</param>
+    /// <param name="vertexData">The array of vertex data defining the shape of the mesh.</param>
     /// <param name="indices">The array of indices specifying how vertices connect to form triangles.</param>
     /// <param name="material">The material to apply to the mesh.</param>
-    public unsafe Mesh(Vector3[] vertices, uint[] indices, Material material)
+    public unsafe Mesh(VertexData[] vertexData, uint[] indices, Material material)
     {
         _material = material;
 
-        bufferObject = new BufferObject<Vector3>(vertices, indices);
+        bufferObject = new BufferObject<VertexData, uint>(vertexData, indices);
 
-        bufferObject.VertexAttribPointer(0, false);
+        bufferObject.VertexAttribPointer(0,3, 0); // Vertices
         bufferObject.EnableVertexAttribArray(0);
+
+        bufferObject.VertexAttribPointer(1, 3, sizeof(Vector3)); // Normal
+        bufferObject.EnableVertexAttribArray(1);
+
+        bufferObject.VertexAttribPointer(2, 2, sizeof(Vector3) * 2); // Texture Coordinate
+        bufferObject.EnableVertexAttribArray(2);
 
         bufferObject.Unbind();
     }
 
     /// <summary>Initializes a new instance of the Mesh class with specified vertices and indices, defaulting to a new Material.</summary>
+    /// <param name="vertexData">The array of vertex data defining the shape of the mesh.</param>
+    /// <param name="indices">The array of indices specifying how vertices connect to form triangles.</param>
+    public Mesh(VertexData[] vertexData, uint[] indices) : this(vertexData, indices, new Material()) { }
+
+    /// <summary>Creates a new instance of the Mesh class with specified vertices and indices, defaulting to a new Material.</summary>
     /// <param name="vertices">The array of vertices defining the shape of the mesh.</param>
     /// <param name="indices">The array of indices specifying how vertices connect to form triangles.</param>
-    public Mesh(Vector3[] vertices, uint[] indices) : this(vertices, indices, new Material()) { }
+    public static Mesh CreateFromVertices(Vector3[] vertices, uint[] indices)
+    {
+        VertexData[] vertexData = new VertexData[vertices.Length];
+        for (int i = 0; i < vertices.Length; i++)
+            vertexData[i] = new VertexData(vertices[i]);
+
+        return new Mesh(vertexData, indices, new Material());
+    }
 
     /// <summary>Renders the mesh.</summary>
     public unsafe void Render()
@@ -52,9 +70,10 @@ public class Mesh : Component, IRenderable
 
         _material.SetMatrix4("projection", Camera.mainCamera.projectionMatrix);
 
-        // TODO use Light class (Sun)
-        _material.SetColor("lightColor", Color.White);
-        _material.SetVector3("lightPos", new Vector3(6, 6, 0));
+        _material.SetColor("lightColor", GlobalLight.color);
+        _material.SetVector3("lightPos", GlobalLight.position);
+        _material.SetFloat("lightAmbientStrength", GlobalLight.ambientStrength);
+        _material.SetFloat("lightSpecularStrength", GlobalLight.specularStrength);
 
         _material.SetVector3("viewPos", Camera.mainCamera.transform.position);
 
