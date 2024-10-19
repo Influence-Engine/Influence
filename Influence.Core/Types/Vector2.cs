@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Influence
 {
     public struct Vector2
@@ -29,7 +24,7 @@ namespace Influence
             this.y = (int)y;
         }
 
-        public override string ToString() => $"([{x}, {y})";
+        public override string ToString() => $"({x}, {y})";
 
         #region Quick Returns
 
