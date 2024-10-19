@@ -404,7 +404,7 @@ namespace Influence
             uniform vec4 lightColor; // Get from global light
             uniform vec3 lightPos; // Get from global light
             uniform float lightAmbientStrength; // Get from global light
-            uniform float lightSpecularStrength; // Get from global light
+            //uniform float lightSpecularStrength; // Get from global light
 
             uniform vec3 viewPos; // Get from Camera
 
@@ -420,14 +420,14 @@ namespace Influence
                 float diff = max(dot(norm, lightDirection), 0);
                 vec3 diffuse = diff * vec3(lightColor.x, lightColor.y, lightColor.z);
 
-                vec3 viewDirection = normalize(viewPos - fPos);
-                vec3 reflectDirection = reflect(-lightDirection, norm);
-                float spec = pow(max(dot(viewDirection, reflectDirection), 0), 32);
-                vec3 specular = lightSpecularStrength * spec * vec3(lightColor.x, lightColor.y, lightColor.z);
+                //vec3 viewDirection = normalize(viewPos - fPos);
+                //vec3 reflectDirection = reflect(-lightDirection, norm);
+                //float spec = pow(max(dot(viewDirection, reflectDirection), 0), 32);
+                //vec3 specular = lightSpecularStrength * spec * vec3(lightColor.x, lightColor.y, lightColor.z);
 
-                vec3 result = (ambient + diffuse + specular) * vec3(mColor.x, mColor.y, mColor.z);
+                vec3 result = (ambient + diffuse) * vec3(mColor.x, mColor.y, mColor.z);
 
-                FragColor = vec4(result, 1.0);
+                FragColor = vec4(result, 1);
             }
             ";
 

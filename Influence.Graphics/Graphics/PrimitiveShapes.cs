@@ -53,25 +53,69 @@ namespace Influence
             VertexData[] vertexData =
             {
                 // Vertices, Normals
-                new VertexData(new Vector3(-0.5f, -0.5f, -0.5f), new Vector3(0,0, -1)),
-                new VertexData(new Vector3(0.5f, -0.5f, -0.5f), new Vector3(0,0, -1)),
-                new VertexData(new Vector3(0.5f, 0.5f, -0.5f), new Vector3(0,0, -1)),
-                new VertexData(new Vector3(-0.5f, 0.5f, -0.5f), new Vector3(0,0, -1)),
 
-                new VertexData(new Vector3(-0.5f, -0.5f, 0.5f), new Vector3(0,0, 1)),
-                new VertexData(new Vector3(0.5f, -0.5f, 0.5f), new Vector3(0,0, 1)),
-                new VertexData(new Vector3(0.5f, 0.5f, 0.5f), new Vector3(0,0, 1)),
-                new VertexData(new Vector3(-0.5f, 0.5f, 0.5f), new Vector3(0,0, 1)),
+                // Front Face
+                new VertexData(new Vector3(-0.5f, -0.5f, 0.5f), new Vector3(0, 0, 1)),
+                new VertexData(new Vector3(0.5f, -0.5f, 0.5f), new Vector3(0, 0, 1)),
+                new VertexData(new Vector3(0.5f, 0.5f, 0.5f), new Vector3(0, 0, 1)),
+                new VertexData(new Vector3(-0.5f, 0.5f, 0.5f), new Vector3(0, 0, 1)),
+
+                // Back Face
+                new VertexData(new Vector3(-0.5f, -0.5f, -0.5f), new Vector3(0, 0, -1)),
+                new VertexData(new Vector3(0.5f, -0.5f, -0.5f), new Vector3(0, 0, -1)),
+                new VertexData(new Vector3(0.5f, 0.5f, -0.5f), new Vector3(0, 0, -1)),
+                new VertexData(new Vector3(-0.5f, 0.5f, -0.5f), new Vector3(0, 0, -1)),
+
+                // Top Face
+                new VertexData(new Vector3(-0.5f, 0.5f, -0.5f), new Vector3(0, 1, 0)),
+                new VertexData(new Vector3(-0.5f, 0.5f, 0.5f), new Vector3(0, 1, 0)),
+                new VertexData(new Vector3(0.5f, 0.5f, 0.5f), new Vector3(0, 1, 0)),
+                new VertexData(new Vector3(0.5f, 0.5f, -0.5f), new Vector3(0, 1, 0)),
+
+                // Bottom Face
+                new VertexData(new Vector3(-0.5f, -0.5f, -0.5f), new Vector3(0, -1, 0)),
+                new VertexData(new Vector3(-0.5f, -0.5f, 0.5f), new Vector3(0, -1, 0)),
+                new VertexData(new Vector3(0.5f, -0.5f, 0.5f), new Vector3(0, -1, 0)),
+                new VertexData(new Vector3(0.5f, -0.5f, -0.5f), new Vector3(0, -1, 0)),
+
+                // Left Face
+                new VertexData(new Vector3(-0.5f, -0.5f -0.5f), new Vector3(-1, 0, 0)),
+                new VertexData(new Vector3(-0.5f, -0.5f, 0.5f), new Vector3(-1, 0, 0)),
+                new VertexData(new Vector3(-0.5f, 0.5f, 0.5f), new Vector3(-1, 0, 0)),
+                new VertexData(new Vector3(-0.5f, 0.5f, -0.5f), new Vector3(-1, 0, 0)),
+
+                // Right Face
+                new VertexData(new Vector3(0.5f, -0.5f, -0.5f), new Vector3(1, 0, 0)),
+                new VertexData(new Vector3(0.5f, -0.5f, 0.5f), new Vector3(1, 0, 0)),
+                new VertexData(new Vector3(0.5f, 0.5f, 0.5f), new Vector3(1, 0, 0)),
+                new VertexData(new Vector3(0.5f, 0.5f, -0.5f), new Vector3(1, 0, 0))
             };
 
-            uint[] indices =
+            uint[] indices = 
             {
-                0, 1, 2, 2, 3, 0,   // Front face
-                1, 5, 6, 6, 2, 1,    // Right face
-                4, 7, 6, 6, 5, 4,   // Back face
-                0, 3, 7, 7, 4, 0,  // Left face
-                3, 2, 6, 6, 7, 3,  // Top face
-                0, 4, 5, 5, 1, 0    // Bottom face
+                // Front Face
+                0, 1, 2,
+                2, 3, 0,
+
+                // Back Face
+                4, 5, 6,
+                6, 7, 4,
+
+                // Top Face
+                8, 9, 10,
+                10, 11, 8,
+
+                // Bottom Face
+                12, 13, 14,
+                14, 15, 12,
+
+                // Left Face
+                16, 17, 18,
+                18, 19, 16,
+
+                // Right Face
+                20, 21, 22,
+                22, 23, 20
             };
 
             return new Mesh(vertexData, indices);

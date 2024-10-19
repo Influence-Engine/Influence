@@ -1,7 +1,6 @@
 ﻿using Influence.Core;
 
 using Silk.NET.OpenGL;
-using System.Runtime.InteropServices;
 
 namespace Influence
 {
