@@ -57,5 +57,6 @@ namespace Influence
         public Vector2 Center => new Vector2(x + width / 2, y + height / 2);
 
         public override string ToString() => $"({x}, {y}, {width}, {height})";
+
     }
 }

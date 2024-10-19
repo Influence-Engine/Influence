@@ -1,4 +1,5 @@
-﻿
+﻿using System;
+
 namespace Influence
 {
     public struct Vector2
