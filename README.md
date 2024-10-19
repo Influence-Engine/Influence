@@ -4,17 +4,16 @@
 Influence is an open-source game engine built entirely in C# with a vision to cater to both hobbyists and advanced developers. Influence is still in its infancy, and while you can't create projects with it just yet, your interest and contributions can help shape its development journey.
 
 ## 🌟 Vision
-The goal of Influence is to be a versatile engine capable of handling everything from classic 2D games like The Legend of Zelda to expansive voxel worlds akin to Cubeworld. We aim to provide a feature-rich platform that supports all the main components necessary for game development.  
+The goal of Influence is to be a hobbyist engine capable of handling everything from Pong to Tetris.
 
 ### Feature Progress (0.0.1 Release)
 | Feature          | Description                                                 | Status        |
 |------------------|-------------------------------------------------------------|---------------|
-|Creating Windows  |Creating, resizing, running core loop.                        |**Working**    |
+|Creating Windows  |Creating, resizing, running core loop.                        |**Planned**    |
 |Window Events     |Listening to resizing, name changing, exit events, etc.       |**Planned**    |
-|Component System  |Registering, creating, using components.                      |**In Progress**|
-|Rendering Meshes  |Rendering meshes using materials and shaders.                 |**In Progress**|
-|Camera Component  |Working camera, with fov, rotation, near/far plane            |**In Progress**|
-|Input System      |Handling basic inputs for mouse and keyboard                  |**Working**    |
+|Component System  |Registering, creating, using components.                      |**Planned**    |
+|Camera Component  |Working camera, with fov, rotation, near/far plane            |**Planned**    |
+|Input System      |Handling basic inputs for mouse and keyboard                  |**Planned**    |
 |Audio System      |Playing audio through an Audio Source                         |**Planned**    |
 |UI System         |Rendering Text and Images in the UI layer                     |**Planned**    |
 |Physics System    |Simble AABB colliding, Rigidbody, Raycasting                  |**Planned**    |
@@ -30,7 +29,7 @@ Free to be used in any way one desires.
 
 ## Chronically Up to Date
 Influence strives to stay on the cutting edge by using the latest .NET versions.  
-Currently, we're using .NET 9, which just came into preview.
+Currently, we're using the latest .NET 9, which is no longer in preview.
 
 ---
 
