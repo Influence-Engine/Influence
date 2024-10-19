@@ -3,6 +3,13 @@
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
+    <OutputType>Exe</OutputType>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="SDL3-CS">
+      <HintPath>SDL3-CS.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 
 </Project>
