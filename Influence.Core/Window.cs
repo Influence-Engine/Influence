@@ -1,70 +1,103 @@
 ﻿using SDL3;
 using System;
+using System.Drawing;
 
 namespace Influence.Core
 {
     public class Window
     {
-        Vector2 curWindowSize = new();
-        public Vector2 WindowSize => curWindowSize;
-
         IntPtr windowPtr;
-        IntPtr renderPtr;
-        SDL.Rect viewport = new();
+        public IntPtr WindowHandle => windowPtr;
 
-        bool videoInitilialized;
+        public string title
+        {
+            get => SDL.GetWindowTitle(windowPtr);
+            set => SDL.SetWindowTitle(windowPtr, value);
+        }
+
+        public Vector2 windowSize
+        {
+            get
+            {
+                Vector2 size = new Vector2();
+                SDL.GetWindowSize(windowPtr, out size.x, out size.y);
+                return size;
+            }
+            set => SDL.SetWindowSize(windowPtr, value.x, value.y);
+        }
+
+        public Vector2 windowMinSize
+        {
+            get
+            {
+                Vector2 size = new Vector2();
+                SDL.GetWindowMinimumSize(windowPtr, out size.x, out size.y);
+                return size;
+            }
+            set => SDL.SetWindowMinimumSize(windowPtr, value.x, value.y);
+        }
+        public Vector2 windowMaxSize
+        {
+            get
+            {
+                Vector2 size = new Vector2();
+                SDL.GetWindowMaximumSize(windowPtr, out size.x, out size.y);
+                return size;
+            }
+            set => SDL.SetWindowMaximumSize(windowPtr, value.x, value.y);
+        }
 
         public Window(int width, int height, string title, bool resizable, bool fullscreen)
         {
-            InitializeVideo();
-
             if(string.IsNullOrEmpty(title))
                 title = "Influence";
 
+            CreateWindow(width, height, title, resizable, fullscreen);
+        }
+
+        void CreateWindow(int width, int height, string title, bool resizable, bool fullscreen)
+        {
+#if DEBUG
+            Console.WriteLine($"Creating Window: {title} ({width}x{height})");
+#endif
+
             SDL.WindowFlags flags = new SDL.WindowFlags();
 
-            if(fullscreen)
+            if (fullscreen)
                 flags |= SDL.WindowFlags.Fullscreen;
 
-            if(resizable)
+            if (resizable)
                 flags |= SDL.WindowFlags.Resizable;
 
             windowPtr = SDL.CreateWindow(title, width, height, flags);
 
-            if(windowPtr == IntPtr.Zero)
+            if (windowPtr == IntPtr.Zero)
             {
                 Console.WriteLine("Unable to create a window. Error: " + SDL.GetError());
                 return;
             }
 
-            renderPtr = SDL.CreateRenderer(windowPtr, -1, SDL.RendererFlags.Accelerated);
-
-            viewport.w = width;
-            viewport.h = height;
-
-            SDL.SetRenderViewport(renderPtr, ref viewport);
-
-            curWindowSize = new Vector2(width, height);
+#if DEBUG
+            Console.WriteLine("New Window Handle: " + windowPtr.ToInt64().ToString());
+#endif
         }
 
-        void InitializeVideo()
+        void ProcessInput()
         {
-            if (videoInitilialized)
-                return;
-
-            if(SDL.Init(SDL.InitFlags.Video) < 0)
+            SDL.Event e;
+            while(SDL.PollEvent(out e) != 0)
             {
-                Console.WriteLine("Unable to initialize SDL Video. Error: " + SDL.GetError());
-                return;
+                Console.WriteLine(e.type.ToString());
+                /*if(e.type == SDL.EventType.Quit)
+                {
+                    isRunning = false;
+                }*/
             }
-
-            videoInitilialized = true;
         }
 
-
-        void CreateWindow()
+        ~Window()
         {
-
+            SDL.DestroyWindow(windowPtr);
         }
     }
 }
