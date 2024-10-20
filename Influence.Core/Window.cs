@@ -47,6 +47,11 @@ namespace Influence.Core
             set => SDL.SetWindowMaximumSize(windowPtr, value.x, value.y);
         }
 
+        public bool fullscreen
+        {
+            get => ((SDL.WindowFlags)SDL.GetWindowFlags(windowPtr) & SDL.WindowFlags.Fullscreen) == 0;
+        }
+
         public Window(int width, int height, string title, bool resizable, bool fullscreen)
         {
             if(string.IsNullOrEmpty(title))
