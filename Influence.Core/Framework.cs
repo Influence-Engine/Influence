@@ -5,6 +5,18 @@ namespace Influence.Core
 {
     public class Framework
     {
+        double timePerFrame = 0.016666666666666667;
+        int _targetFramerate = 60;
+        public int targetFramerate
+        {
+            set
+            {
+                timePerFrame = 1d / value;
+                _targetFramerate = value;
+            }
+            get => _targetFramerate;
+        }
+
         Window window;
         Renderer renderer;
 
@@ -57,7 +69,12 @@ namespace Influence.Core
                 Time.time += Time.deltaTime;
                 Time.preciseTime += Time.preciseDeltaTime;
 
-                //Console.WriteLine(1000000000 / Time.preciseDeltaTime);
+                double passedTime = Time.frameTime;
+                if(passedTime < timePerFrame)
+                {
+                    uint delay = (uint)((timePerFrame - passedTime) * 1000);
+                    SDL.Delay(delay);
+                }
             }
 
             SDL.ClearError();
