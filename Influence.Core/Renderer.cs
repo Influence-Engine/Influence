@@ -35,6 +35,12 @@ namespace Influence.Core
             SDL.SetRenderViewport(rendererPtr, ref viewport);
         }
 
+        /// <summary>Clear the renderer. Call before rendering context.</summary>
+        public void Clear() => SDL.RenderClear(rendererPtr);
+
+        /// <summary>Update the screen with any rendering performed since the previous call.</summary>
+        public void Display() => SDL.RenderPresent(rendererPtr);
+
         ~Renderer()
         {
             SDL.DestroyRenderer(rendererPtr);

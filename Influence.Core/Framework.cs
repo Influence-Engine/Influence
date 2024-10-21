@@ -35,9 +35,10 @@ namespace Influence.Core
             videoInitialized = true;
         }
 
-        public void Simulate()
+        protected virtual void Simulate()
         {
             simulating = true;
+            SDL.Event e;
 
             while(simulating)
             {
@@ -46,34 +47,63 @@ namespace Influence.Core
                 Time.preciseDeltaTime = currentTicks - Time.preciseTime;
                 Time.deltaTime = Time.preciseDeltaTime * 1.0e-9;
 
-                ProcessInput();
+                while(SDL.PollEvent(out e) && e.type != SDL.EventType.PollSentinel)
+                {
+                    ProccessEvents(e);
+                }
+
+                Render();
 
                 Time.time += Time.deltaTime;
                 Time.preciseTime += Time.preciseDeltaTime;
 
                 //Console.WriteLine(1000000000 / Time.preciseDeltaTime);
             }
+
+            SDL.ClearError();
         }
 
-        protected virtual void ProcessInput()
+        protected virtual void ProccessEvents(SDL.Event e)
         {
-            SDL.Event e;
-            while (SDL.PollEvent(out e) && e.type != SDL.EventType.PollSentinel)
+            switch (e.type)
             {
-                switch(e.type)
-                {
-                    case SDL.EventType.Quit:
+                case SDL.EventType.Quit:
 
 #if DEBUG
-                        Console.WriteLine("Closing Framework requested...");
+                    Console.WriteLine("Closing Framework requested...");
 #endif
-                        simulating = false;
+                    simulating = false;
 
-                        SDL.Quit();
-                        break;
-                }
-
+                    SDL.Quit();
+                    break;
             }
         }
+
+        protected virtual void Render()
+        {
+            // Clear the screen
+            Clear();
+
+            // Set background Color
+
+
+
+            // Lastly Display it all
+            Display();
+        }
+
+        public void Quit()
+        {
+            SDL.Event e = new();
+            e.type = SDL.EventType.Quit;
+
+            SDL.PushEvent(ref e);
+        }
+
+        /// <summary>Clear the renderer. Call before rendering context.</summary>
+        public void Clear() => renderer.Clear();
+
+        /// <summary>Update the screen with any rendering performed since the previous call.</summary>
+        public void Display() => renderer.Display();
     }
 }
