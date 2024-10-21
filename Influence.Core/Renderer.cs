@@ -16,7 +16,7 @@ namespace Influence.Core
             Console.WriteLine($"Creating Renderer: Window Handle => {windowPtr.ToInt64()} ({width}x{height})");
 #endif
 
-            rendererPtr = SDL.CreateRenderer(windowPtr, string.Empty);
+            rendererPtr = SDL.CreateRenderer(windowPtr, null);
 
             if (rendererPtr == IntPtr.Zero)
             {
