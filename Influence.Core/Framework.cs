@@ -8,7 +8,6 @@ namespace Influence.Core
         Window window;
         Renderer renderer;
 
-
         bool videoInitialized;
         bool simulating;
 
@@ -47,10 +46,27 @@ namespace Influence.Core
                 Time.preciseDeltaTime = currentTicks - Time.preciseTime;
                 Time.deltaTime = Time.preciseDeltaTime * 1.0e-9;
 
+                ProcessInput();
+
                 Time.time += Time.deltaTime;
                 Time.preciseTime += Time.preciseDeltaTime;
 
                 Console.WriteLine(1000000000 / Time.preciseDeltaTime);
+            }
+
+            SDL.Quit();
+        }
+
+        protected virtual void ProcessInput()
+        {
+            SDL.Event e;
+            while (SDL.PollEvent(out e) && e.type != SDL.EventType.PollSentinel)
+            {
+                Console.WriteLine(e.type.ToString());
+                if(e.type == SDL.EventType.Quit)
+                {
+                    simulating = false;
+                }
             }
         }
     }

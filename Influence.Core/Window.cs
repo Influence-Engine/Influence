@@ -1,6 +1,5 @@
 ﻿using SDL3;
 using System;
-using System.Drawing;
 
 namespace Influence.Core
 {
@@ -85,19 +84,6 @@ namespace Influence.Core
 #if DEBUG
             Console.WriteLine("New Window Handle: " + windowPtr.ToInt64().ToString());
 #endif
-        }
-
-        void ProcessInput()
-        {
-            SDL.Event e;
-            while(SDL.PollEvent(out e) != 0)
-            {
-                Console.WriteLine(e.type.ToString());
-                /*if(e.type == SDL.EventType.Quit)
-                {
-                    isRunning = false;
-                }*/
-            }
         }
 
         ~Window()
