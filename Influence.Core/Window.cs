@@ -48,13 +48,29 @@ namespace Influence.Core
 
         public bool fullscreen
         {
-            get => ((SDL.WindowFlags)SDL.GetWindowFlags(windowPtr) & SDL.WindowFlags.Fullscreen) == 0;
+            get => ((SDL.WindowFlags)SDL.GetWindowFlags(windowPtr) & SDL.WindowFlags.Fullscreen) != 0;
+            set => SDL.SetWindowFullscreen(windowPtr, value);
         }
 
-        public Window(int width, int height, string title, bool resizable, bool fullscreen)
+        public bool alwaysOnTop
         {
-            if(string.IsNullOrEmpty(title))
-                title = "Influence";
+            get => ((SDL.WindowFlags)SDL.GetWindowFlags(windowPtr) & SDL.WindowFlags.AlwaysOnTop) != 0;
+            set => SDL.SetWindowAlwaysOnTop(windowPtr, value);
+        }
+
+        public bool borderless
+        {
+            get => ((SDL.WindowFlags)SDL.GetWindowFlags(windowPtr) & SDL.WindowFlags.Borderless) != 0;
+            set => SDL.SetWindowBordered(windowPtr, !value);
+        }
+
+        public Window(int width = 512, int height = 512, string title = "Influence",  bool resizable = false, bool fullscreen = false)
+        {
+            if (width <= 0 || height <= 0)
+                throw new ArgumentOutOfRangeException(nameof(width), "Window width and height must be greater than 0.");
+
+            if (string.IsNullOrWhiteSpace(title))
+                throw new ArgumentException("Title cannot be a null or empty", nameof(title));
 
             CreateWindow(width, height, title, resizable, fullscreen);
         }
@@ -90,5 +106,7 @@ namespace Influence.Core
         {
             SDL.DestroyWindow(windowPtr);
         }
+
+
     }
 }
