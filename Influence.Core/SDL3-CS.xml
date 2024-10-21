@@ -4,10 +4,212 @@
         <name>SDL3-CS</name>
     </assembly>
     <members>
+        <member name="M:SDL3.SDL.GetCPUCount">
+            <summary>Get the number of logical CPU cores available.</summary>
+            <returns>The total number of logical CPU cores. The number of logical cores may be more than physical cores.</returns>
+        </member>
+        <member name="M:SDL3.SDL.GetCPUCacheLineSize">
+            <summary>Determine the L1 cache line size of the CPU.</summary>
+            <returns>The L1 cache line size of the CPU, in bytes.</returns>
+        </member>
+        <member name="M:SDL3.SDL.GetSystemRAM">
+            <summary>Get the amount of RAM configured in the system.</summary>
+            <returns>The amount of RAM configured in the system in MiB.</returns>
+        </member>
+        <member name="M:SDL3.SDL.GetSIMDAlignment">
+            <summary>Gets the alignment this system needs for SIMD allocations.</summary>
+            <returns>The alignment in bytes needed for available, known SIMD instructions.</returns>
+        </member>
+        <member name="M:SDL3.SDL.SetError(System.String)">
+            <summary>Set the SDL error message for the current thread.</summary>
+            <param name="fmtAndArglist">Additional parameters matching % tokens in the fmt string, if any.</param>
+        </member>
+        <member name="M:SDL3.SDL.OutOfMemory">
+            <summary>Set an error indicating that memory allocation failed.</summary>
+        </member>
+        <member name="M:SDL3.SDL.GetError">
+            <summary>Retrieve a message about the last error that occurred on the current thread.</summary>
+            <returns>The message with information about the specifiic error that occured, or NULL.</returns>
+        </member>
+        <member name="M:SDL3.SDL.ClearError">
+            <summary>Clear any previous error message for this thread.</summary>
+        </member>
+        <member name="T:SDL3.SDL.EventType">
+            <summary>The types of events that can be delivered.</summary>
+        </member>
         <member name="F:SDL3.SDL.EventType.Last">
-            <summary>
-            Last event is used for bounding internal arrays
-            </summary>
+            <summary>Last event is used for bounding internal arrays </summary>
+        </member>
+        <member name="T:SDL3.SDL.CommonEvent">
+            <summary>Fields shared by every Event.</summary>
+        </member>
+        <member name="T:SDL3.SDL.DisplayEvent">
+            <summary>Display state change event data.</summary>
+        </member>
+        <member name="T:SDL3.SDL.WindowEvent">
+            <summary>Window state change event data. </summary>
+        </member>
+        <member name="T:SDL3.SDL.KeyboardDeviceEvent">
+            <summary>Keyboard device event structure.</summary>
+        </member>
+        <member name="T:SDL3.SDL.KeyboardEvent">
+            <summary>Keybard button event structure.</summary>
+        </member>
+        <member name="T:SDL3.SDL.TextEditingEvent">
+            <summary>Keyboard text editing event structure.</summary>
+        </member>
+        <member name="T:SDL3.SDL.TextEditingCandidatesEvent">
+            <summary>Keyboard IME candidates event structure.</summary>
+        </member>
+        <member name="T:SDL3.SDL.TextInputEvent">
+            <summary>Keyboard text input event structure.</summary>
+        </member>
+        <member name="T:SDL3.SDL.MouseDeviceEvent">
+            <summary>Mouse device event structure.</summary>
+        </member>
+        <member name="T:SDL3.SDL.MouseMotionEvent">
+            <summary>Mouse motion event structure.</summary>
+        </member>
+        <member name="T:SDL3.SDL.MouseButtonEvent">
+            <summary>Mouse button event structure.</summary>
+        </member>
+        <member name="T:SDL3.SDL.MouseWheelEvent">
+            <summary>Mouse wheel event structure.</summary>
+        </member>
+        <member name="T:SDL3.SDL.JoyAxisEvent">
+            <summary>Joystick axis motion event structure.</summary>
+        </member>
+        <member name="T:SDL3.SDL.JoyBallEvent">
+            <summary>Joystick trackball motion event structure.</summary>
+        </member>
+        <member name="T:SDL3.SDL.JoyHatEvent">
+            <summary>Joystick hat position change event structure.</summary>
+        </member>
+        <member name="T:SDL3.SDL.JoyButtonEvent">
+            <summary>Joystick button event structure.</summary>
+        </member>
+        <member name="T:SDL3.SDL.JoyDeviceEvent">
+            <summary>Joystick device event structure.</summary>
+        </member>
+        <member name="T:SDL3.SDL.JoyBatteryEvent">
+            <summary>Joystick battery level change event structure.</summary>
+        </member>
+        <member name="T:SDL3.SDL.GamepadAxisEvent">
+            <summary>Gamepad axis motion event structure.</summary>
+        </member>
+        <member name="T:SDL3.SDL.GamepadButtonEvent">
+            <summary>Gamepad button event structure.</summary>
+        </member>
+        <member name="T:SDL3.SDL.GamepadDeviceEvent">
+            <summary>Gamepad device event structure.</summary>
+        </member>
+        <member name="T:SDL3.SDL.GamepadTouchpadEvent">
+            <summary>Gamepad touchpad event structure.</summary>
+        </member>
+        <member name="T:SDL3.SDL.GamepadSensorEvent">
+            <summary>Gamepad sensor event structure.</summary>
+        </member>
+        <member name="T:SDL3.SDL.AudioDeviceEvent">
+            <summary>Audio device event structure.</summary>
+        </member>
+        <member name="T:SDL3.SDL.CameraDeviceEvent">
+            <summary>Camera deviuce event structure.</summary>
+        </member>
+        <member name="T:SDL3.SDL.TouchFingerEvent">
+            <summary>Touch finger event structure.</summary>
+        </member>
+        <member name="T:SDL3.SDL.PenProximityEvent">
+            <summary>Pressure-sensitive pen proximity event structure.</summary>
+        </member>
+        <member name="T:SDL3.SDL.PenMotionEvent">
+            <summary>Pressure-sensitive pen motion event structure.</summary>
+        </member>
+        <member name="T:SDL3.SDL.PenTouchEvent">
+            <summary>Pressure-sensitive pen touch event structure.</summary>
+        </member>
+        <member name="T:SDL3.SDL.PenButtonEvent">
+            <summary>Pressure-sensitive pen button event structure.</summary>
+        </member>
+        <member name="T:SDL3.SDL.PenAxisEvent">
+            <summary>Pressure-sensitive pen pressure / angle event structure.</summary>
+        </member>
+        <member name="T:SDL3.SDL.DropEvent">
+            <summary>An event used to drop text or request a file open by the system.</summary>
+        </member>
+        <member name="T:SDL3.SDL.ClipboardEvent">
+            <summary>An event trigged when the clipboard contens have changed.</summary>
+        </member>
+        <member name="T:SDL3.SDL.SensorEvent">
+            <summary>Sensor Event.</summary>
+        </member>
+        <member name="T:SDL3.SDL.QuitEvent">
+            <summary>The "quit requested" event.</summary>
+        </member>
+        <member name="T:SDL3.SDL.UserEvent">
+            <summary>User defined event type.</summary>
+        </member>
+        <member name="T:SDL3.SDL.Event">
+            <summary>The structure for all events in SDL.</summary>
+        </member>
+        <member name="M:SDL3.SDL.PumpEvents">
+            <summary>Pump the event loop, gathering events from the input devices.</summary>
+        </member>
+        <member name="T:SDL3.SDL.EventAction">
+            <summary>The type of action to request from "PeepEvents."</summary>
+        </member>
+        <member name="M:SDL3.SDL.PeepEvents(SDL3.SDL.Event*,System.Int32,SDL3.SDL.EventAction,SDL3.SDL.EventType,SDL3.SDL.EventType)">
+            <summary>Check the event queue for messages and optionally return them.</summary>
+            <param name="events">Destination buffer for the retieved events.</param>
+            <param name="numEvents">The number of events to add back to the event queue, or the maximum number of events to retrieve.</param>
+            <param name="action">Action to take.</param>
+            <param name="minType">The minimum value of the event type to be considered.</param>
+            <param name="maxType">The maximum value of the event type to be considered.</param>
+            <returns>The number of events actually stored or -1 on failure.</returns>
+        </member>
+        <member name="M:SDL3.SDL.PeepEvents(SDL3.SDL.Event[],System.Int32,SDL3.SDL.EventAction,SDL3.SDL.EventType,SDL3.SDL.EventType)">
+            <summary>Check the event queue for messages and optionally return them.</summary>
+            <param name="events">Destination buffer for the retieved events.</param>
+            <param name="numEvents">The number of events to add back to the event queue, or the maximum number of events to retrieve.</param>
+            <param name="action">Action to take.</param>
+            <param name="minType">The minimum value of the event type to be considered.</param>
+            <param name="maxType">The maximum value of the event type to be considered.</param>
+            <returns>The number of events actually stored or -1 on failure.</returns>
+        </member>
+        <member name="M:SDL3.SDL.FlushEvent(SDL3.SDL.EventType)">
+            <summary>Clear events of a specific type from the event queue.</summary>
+            <param name="type">The type of event to be cleared.</param>
+        </member>
+        <member name="M:SDL3.SDL.FlushEvents(SDL3.SDL.EventType,SDL3.SDL.EventType)">
+            <summary>Clear events of a range of types from the event queue.</summary>
+            <param name="minType">The low end of event type to be cleared. (inclusive)</param>
+            <param name="maxType">The high end of event type to be cleared. (inclusive)</param>
+        </member>
+        <member name="M:SDL3.SDL.PollEvent(SDL3.SDL.Event@)">
+            <summary>Poll for currently pending events.</summary>
+            <param name="_event">The Event structure to be filled with the next event from the queue, or NULL.</param>
+            <returns>True if this got an event or false if there are none available.</returns>
+        </member>
+        <member name="M:SDL3.SDL.WaitEvent(SDL3.SDL.Event@)">
+            <summary>Wait indefinetly for the next available event.</summary>
+            <param name="_event">The Event structure to be filled with the next event from the queue, or NULL.</param>
+            <returns>True on success or false if there was an error while waiting for events.</returns>
+        </member>
+        <member name="M:SDL3.SDL.WaitEventTimeout(SDL3.SDL.Event@,System.Int32)">
+            <summary>Wait until the specified timeout (in milliseconds) for the next available event.</summary>
+            <param name="_event">The Event structure to be fulled with the next event from the queue, or NULL.</param>
+            <param name="timeout">The maximum number of milliseconds to wait for the next available event.</param>
+            <returns>True if this got an event or false if the timout elapsed without any events availabe.</returns>
+        </member>
+        <member name="M:SDL3.SDL.PushEvent(SDL3.SDL.Event@)">
+            <summary>Add an event to the event queue.</summary>
+            <param name="_event">The Event to be added to the queue.</param>
+            <returns>True on success, false if the event was filtered or on failure.</returns>
+        </member>
+        <member name="T:SDL3.SDL.EventFilter">
+            <summary>Function pointer used for callbacks that watch the event queue.</summary>
+            <param name="userdata">What was passed as userdata.</param>
+            <param name="_event">The Event that triggered the callback.</param>
+            <returns>True to permit event to be added to the queue, and false to disallow it.</returns>
         </member>
         <member name="M:SDL3.SDL.CreateRenderer(System.IntPtr,System.String)">
             <summary>Create a 2D rendering context for a window.</summary>
