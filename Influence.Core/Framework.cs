@@ -51,10 +51,8 @@ namespace Influence.Core
                 Time.time += Time.deltaTime;
                 Time.preciseTime += Time.preciseDeltaTime;
 
-                Console.WriteLine(1000000000 / Time.preciseDeltaTime);
+                //Console.WriteLine(1000000000 / Time.preciseDeltaTime);
             }
-
-            SDL.Quit();
         }
 
         protected virtual void ProcessInput()
@@ -62,11 +60,19 @@ namespace Influence.Core
             SDL.Event e;
             while (SDL.PollEvent(out e) && e.type != SDL.EventType.PollSentinel)
             {
-                Console.WriteLine(e.type.ToString());
-                if(e.type == SDL.EventType.Quit)
+                switch(e.type)
                 {
-                    simulating = false;
+                    case SDL.EventType.Quit:
+
+#if DEBUG
+                        Console.WriteLine("Closing Framework requested...");
+#endif
+                        simulating = false;
+
+                        SDL.Quit();
+                        break;
                 }
+
             }
         }
     }
