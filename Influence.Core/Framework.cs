@@ -72,8 +72,7 @@ namespace Influence.Core
                 Time.time += Time.deltaTime;
                 Time.preciseTime += Time.preciseDeltaTime;
 
-                Input.keysPressedThisFrame.Clear();
-                Input.keysReleasedThisFrame.Clear();
+                Input.Reset();
 
                 double passedTime = Time.frameTime;
                 if(passedTime < timePerFrame)
@@ -106,6 +105,10 @@ namespace Influence.Core
                 case SDL.EventType.KeyUp:
                     Input.keyStates[e.key.key] = false;
                     Input.keysReleasedThisFrame.Add(e.key.key);
+                    break;
+                case SDL.EventType.MouseMotion:
+                    Input.mousePosition = new Vector2(e.motion.x, e.motion.y);
+                    Input.mouseDelta = new Vector2(e.motion.xRel, e.motion.yRel);
                     break;
             }
         }
