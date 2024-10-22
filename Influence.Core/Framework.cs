@@ -41,7 +41,7 @@ namespace Influence.Core
             if (videoInitialized)
                 return;
 
-            if (SDL.Init(SDL.InitFlags.Video) < 0)
+            if (SDL.Init(SDL.InitFlags.Video))
             {
                 Console.WriteLine("Unable to initialize SDL Video. Error: " + SDL.GetError());
                 return;

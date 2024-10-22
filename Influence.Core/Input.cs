@@ -26,8 +26,8 @@ namespace Influence
 
         #region Mouse
 
-        public static Vector2 mousePosition = Vector2.zero;
-        public static Vector2 mouseDelta = Vector2.zero;
+        public static Vector2 mousePosition;
+        public static Vector2 mouseDelta;
 
         #endregion
 

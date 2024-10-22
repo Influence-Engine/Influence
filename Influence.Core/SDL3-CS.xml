@@ -211,11 +211,103 @@
             <param name="_event">The Event that triggered the callback.</param>
             <returns>True to permit event to be added to the queue, and false to disallow it.</returns>
         </member>
+        <member name="M:SDL3.SDL.SetHint(System.String,System.String)">
+            <summary>Set a hint with normal priority.</summary>
+            <param name="name">The hint to set.</param>
+            <param name="value">The valur of the hint variable.</param>
+            <returns>True on success or false on failure.</returns>
+        </member>
+        <member name="M:SDL3.SDL.ResetHint(System.String)">
+            <summary>Reset a hint to the default value.</summary>
+            <param name="name">The hint to reset.</param>
+            <returns>True on sucess or false on failure.</returns>
+        </member>
+        <member name="M:SDL3.SDL.ResetHints">
+            <summary>Reset all hints to the default values.</summary>
+        </member>
+        <member name="M:SDL3.SDL.GetHint(System.String)">
+            <summary>Get the value of a hint.</summary>
+            <param name="name">The hint to query.</param>
+            <returns>The string value of a hint or NULL if the hint isn't set.</returns>
+        </member>
+        <member name="M:SDL3.SDL.GetHintBoolean(System.String,System.Boolean)">
+            <summary>Get the boolean value of a hint variable.</summary>
+            <param name="name">The name of the hint tog et the boolean value from.</param>
+            <param name="defaultValue">The value to return if the hint does not exist.</param>
+            <returns>The boolean value of a hint or the given default value if the hint does not exist.</returns>
+        </member>
+        <member name="T:SDL3.SDL.InitFlags">
+            <summary>Initialization Flags for "SDL.Init"</summary>
+        </member>
+        <member name="M:SDL3.SDL.Init(System.UInt32)">
+            <summary>Initialize the SDL library.</summary>
+            <param name="flags">Subsystem initialization flags.</param>
+            <returns>True on success or false on failure.</returns>
+        </member>
+        <member name="M:SDL3.SDL.Init(SDL3.SDL.InitFlags)">
+            <summary>Initialize the SDL library.</summary>
+            <param name="flags">Subsystem initialization flags.</param>
+            <returns>True on success or false on failure.</returns>
+        </member>
+        <member name="M:SDL3.SDL.InitSubSystem(System.UInt32)">
+            <summary>Compatibility function to initialize the SDL library.</summary>
+            <param name="flags">Subsystem initialization flags.</param>
+            <returns>True on success or false on failure.</returns>
+        </member>
+        <member name="M:SDL3.SDL.InitSubSystem(SDL3.SDL.InitFlags)">
+            <summary>Compatibility function to initialize the SDL library.</summary>
+            <param name="flags">Subsystem initialization flags.</param>
+            <returns>True on success or false on failure.</returns>
+        </member>
+        <member name="M:SDL3.SDL.QuitSubSystem">
+            <summary>Shit down specific SDL subsystems.</summary>
+        </member>
+        <member name="M:SDL3.SDL.WasInit(System.UInt32)">
+            <summary>Get a mask of the specified subsystems which are currently initialized.</summary>
+            <param name="flags">Subsystem initialization flags.</param>
+            <returns>A mask of all initialized subsystems if flags is 0, otherwise the init status of the specified subsystems.</returns>
+        </member>
+        <member name="M:SDL3.SDL.Quit">
+            <summary>Clean up all initialized subsystems.</summary>
+        </member>
+        <member name="M:SDL3.SDL.GetPlatform">
+            <summary>Gets the name of the platform.</summary>
+            <returns>The name of the platform. If the correct name is not available, returns string starting with "Unknown".</returns>
+        </member>
+        <member name="T:SDL3.SDL.Point">
+            <summary>Defines a point (using integers).</summary>
+        </member>
+        <member name="T:SDL3.SDL.FPoint">
+            <summary>Defines a point (using floats).</summary>
+        </member>
+        <member name="T:SDL3.SDL.Rect">
+            <summary>A rectangle, with the origin at the upper left (using integers).</summary>
+        </member>
+        <member name="T:SDL3.SDL.FRect">
+            <summary>A rectangle, with the origin at the upper left (using floats).</summary>
+        </member>
         <member name="M:SDL3.SDL.CreateRenderer(System.IntPtr,System.String)">
             <summary>Create a 2D rendering context for a window.</summary>
             <param name="window">The window where rendering is displayed.</param>
             <param name="name">The name of the rendering driver to initialize, or NULL to let SDL choose one.</param>
             <returns>A valid rendering pointer or 0 on failure.</returns>
+        </member>
+        <member name="F:SDL3.SDL.majorVersion">
+            <summary>The current major version of SDL headers.</summary>
+        </member>
+        <member name="F:SDL3.SDL.minorVersion">
+            <summary>The current minor version of the SDL headers.</summary>
+        </member>
+        <member name="F:SDL3.SDL.patchLevel">
+            <summary>The current patch version of the SDL headers.</summary>
+        </member>
+        <member name="M:SDL3.SDL.GetVersion">
+            <summary>Get the version of SDL that is linked.</summary>
+            <returns>The version of the linked library.</returns>
+        </member>
+        <member name="M:SDL3.SDL.GetRevision">
+            <summary>Get the code revision of SDL that is linked.</summary>
+            <returns>An arbitrary string, uniquely identifying the exact revision of the SDL library in use.</returns>
         </member>
         <member name="M:SDL3.SDL.CreateWindow(System.String,System.Int32,System.Int32,SDL3.SDL.WindowFlags)">
             <summary>Create a window with the specified dimensions and flags.</summary>
