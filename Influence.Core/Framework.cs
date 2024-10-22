@@ -18,7 +18,10 @@ namespace Influence.Core
         }
 
         Window window;
+        public Window Window => window;
+
         Renderer renderer;
+        public Renderer Renderer => renderer;
 
         bool videoInitialized;
         bool simulating;
@@ -69,6 +72,9 @@ namespace Influence.Core
                 Time.time += Time.deltaTime;
                 Time.preciseTime += Time.preciseDeltaTime;
 
+                Input.keysPressedThisFrame.Clear();
+                Input.keysReleasedThisFrame.Clear();
+
                 double passedTime = Time.frameTime;
                 if(passedTime < timePerFrame)
                 {
@@ -92,6 +98,14 @@ namespace Influence.Core
                     simulating = false;
 
                     SDL.Quit();
+                    break;
+                case SDL.EventType.KeyDown:
+                    Input.keyStates[e.key.key] = true;
+                    Input.keysPressedThisFrame.Add(e.key.key);
+                    break;
+                case SDL.EventType.KeyUp:
+                    Input.keyStates[e.key.key] = false;
+                    Input.keysReleasedThisFrame.Add(e.key.key);
                     break;
             }
         }
